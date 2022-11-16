@@ -8,11 +8,11 @@ export function middleware(request: NextRequest) {
   console.log(request.url);
 
   console.log("cookies");
-  console.log(request.cookies);
+  //console.log(request.cookies);
   ///??????????
   if ("appSession" in request.cookies) {
     console.log("redirect");
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("http://localhost:3000", request.url));
   }
   //if includes api in url
   //get token and attach it to the request
