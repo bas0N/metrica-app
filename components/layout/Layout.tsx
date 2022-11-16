@@ -7,7 +7,6 @@ type Props = {
 function Layout({ children }: Props) {
   return (
     <div>
-      <NavbarComponent />
       <div className="max-w-[1280px] mx-auto">{children}</div>
 
       <Footer />

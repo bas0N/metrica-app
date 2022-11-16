@@ -1,8 +1,9 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HistoryTable from "../../components/dashboard/HistoryTable";
+import HistoryTableMobile from "../../components/dashboard/HistoryTableMobile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import { GetSurveysPaginated, Survey } from "../../types/survey";
 
@@ -41,21 +42,45 @@ function index({
   pagesAvailable: number;
   totalItems: number;
 }) {
+  const [mobile, setMobile] = useState(true);
+
+  useEffect(() => {
+    /* Inside of a "useEffect" hook add an event listener that updates
+         the "width" state variable when the window size changes */
+    window.addEventListener("resize", () => {
+      console.log("width is: ", window.innerWidth);
+      window.innerWidth < 620 ? setMobile(true) : setMobile(false);
+    });
+
+    /* passing an empty array as the dependencies of the effect will cause this
+         effect to only run when the component mounts, and not each time it updates.
+         We only want the listener to be added once */
+  }, []);
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
   if (isLoading) {
     return <div></div>;
   } else if (user) {
-    return (
-      <div className="">
-        <HistoryTable
+    if (!mobile) {
+      return (
+        <div className="">
+          <HistoryTable
+            surveys={surveys}
+            pagesAvailable={pagesAvailable}
+            totalItems={totalItems}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <HistoryTableMobile
           surveys={surveys}
           pagesAvailable={pagesAvailable}
           totalItems={totalItems}
         />
-      </div>
-    );
+      );
+    }
   } else if (!user) {
     router.replace("/");
   }
