@@ -83,7 +83,7 @@ function SendFormToApplicant({
     }),
   };
   return (
-    <div className="py-4 px-10 h-full max-w-[800px]">
+    <div className="py-4 px-10 h-full mt-16 max-w-[800px] w-full gap-10 mx-auto">
       <ToastContainer />
 
       <Text className="text-5xl  font-bold">Provide candidate details</Text>

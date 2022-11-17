@@ -86,7 +86,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   return (
     <div className="py-4 px-10 h-full max-w-[800px] gap-10 mx-auto">
       <ToastContainer />
-      <Grid.Container className="grid grid-cols-2 mt-16 gap-10 w-full ">
+      <Grid.Container className="grid grid-cols-2 mt-8 gap-10 w-full ">
         <Text className="text-5xl col-span-2  font-bold">
           Provide recruitment details
         </Text>
