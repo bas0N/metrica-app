@@ -2,8 +2,10 @@ import {
   Button,
   Checkbox,
   FormElement,
+  Grid,
   Input,
   Radio,
+  Spacer,
   Text,
   Textarea,
 } from "@nextui-org/react";
@@ -82,10 +84,12 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     });
   };
   return (
-    <div className="py-4 px-10 h-full max-w-[800px]">
+    <div className="py-4 px-10 h-full max-w-[800px] gap-10 mx-auto">
       <ToastContainer />
-      <div className="flex flex-col justify-around h-full">
-        <Text className="text-5xl  font-bold">Provide recruitment details</Text>
+      <Grid.Container className="grid grid-cols-2 mt-16 gap-10 w-full ">
+        <Text className="text-5xl col-span-2  font-bold">
+          Provide recruitment details
+        </Text>
         <Input
           onChange={handleInputChange}
           value={values.recruitmentId}
@@ -93,6 +97,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           underlined
           labelPlaceholder="Id of the recruitment process "
           color="default"
+          className="col-span-2"
         />
         <Input
           onChange={handleInputChange}
@@ -102,7 +107,6 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           labelPlaceholder="Name of the position"
           color="default"
         />
-
         <Input
           onChange={handleInputChange}
           value={values.recruitmentDeadline}
@@ -110,7 +114,13 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           width="186px"
           label="Questionare ending date"
           type="date"
+          className=" col-span-2"
         />
+      </Grid.Container>
+
+      <Spacer y={1} />
+
+      <div className="flex flex-col">
         <Textarea
           onChange={handleInputChange}
           value={values.recruitmentDescription}
@@ -118,8 +128,12 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
+          className=" col-start-1 col-end-2 col"
         />
+        <Spacer y={2} />
+
         <Radio.Group
+          className="col-span-2"
           label="Select questionare type"
           value={checked}
           onChange={setChecked}
@@ -159,20 +173,21 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
             UX/UI
           </Radio>
         </Radio.Group>
-        <div className="flex gap-4">
-          <ConfirmationModal
-            confirmationPrompt="Are you sure you want to cancel?"
-            buttonTitle="Cancel"
-            buttonType="CANCEL"
-            funct={handleCancel}
-          />
-          <ConfirmationModal
-            confirmationPrompt="Are you sure you want to add recruitment?"
-            buttonTitle="Create"
-            buttonType="CONFIRM"
-            funct={handleSubmit}
-          />
-        </div>
+      </div>
+      <Spacer y={2} />
+      <div className="flex gap-4">
+        <ConfirmationModal
+          confirmationPrompt="Are you sure you want to cancel?"
+          buttonTitle="Cancel"
+          buttonType="CANCEL"
+          funct={handleCancel}
+        />
+        <ConfirmationModal
+          confirmationPrompt="Are you sure you want to add recruitment?"
+          buttonTitle="Create"
+          buttonType="CONFIRM"
+          funct={handleSubmit}
+        />
       </div>
     </div>
   );
