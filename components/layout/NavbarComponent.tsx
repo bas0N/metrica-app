@@ -44,18 +44,7 @@ function NavbarComponent() {
 
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
-  const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const collapseItems = ["Dashboard", "Send Form", "Manage recruitments"];
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());

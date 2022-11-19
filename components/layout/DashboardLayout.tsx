@@ -31,17 +31,12 @@ function DashboardLayout({ children }: Props) {
     router.push("/api/auth/logout");
   };
   const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    { name: "Dashboard", path: "/" },
+    { name: "Send Form", path: "/dashboard/send-form" },
+    { name: "Manage Recruitments", path: "/dashboard/manage-recruitments" },
   ];
+
+  console.log(router.pathname);
   return (
     <div className="flex flex-col sm:h-screen ">
       <Navbar isBordered variant="sticky">
@@ -182,21 +177,18 @@ function DashboardLayout({ children }: Props) {
         <Navbar.Collapse disableAnimation>
           {collapseItems.map((item, index) => (
             <Navbar.CollapseItem
-              key={item}
-              activeColor="warning"
-              css={{
-                color: index === collapseItems.length - 1 ? "$error" : "",
-              }}
-              isActive={index === 2}
+              key={item.name}
+              activeColor="success"
+              isActive={item.path == router.pathname}
             >
               <UiLink
                 color="inherit"
                 css={{
                   minWidth: "100%",
                 }}
-                href="#"
+                href={item.path}
               >
-                {item}
+                {item.name}
               </UiLink>
             </Navbar.CollapseItem>
           ))}
