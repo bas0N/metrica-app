@@ -42,16 +42,17 @@ function index({
   pagesAvailable: number;
   totalItems: number;
 }) {
-  const [mobile, setMobile] = useState(true);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     /* Inside of a "useEffect" hook add an event listener that updates
          the "width" state variable when the window size changes */
+    window.innerWidth < 620 ? setMobile(true) : setMobile(false);
+
     window.addEventListener("resize", () => {
       console.log("width is: ", window.innerWidth);
       window.innerWidth < 620 ? setMobile(true) : setMobile(false);
     });
-
     /* passing an empty array as the dependencies of the effect will cause this
          effect to only run when the component mounts, and not each time it updates.
          We only want the listener to be added once */
@@ -82,7 +83,8 @@ function index({
       );
     }
   } else if (!user) {
-    router.replace("/");
+    console.log("nie ma usera w dashboardzie");
+    router.replace("http://localhost:3000/");
   }
 }
 

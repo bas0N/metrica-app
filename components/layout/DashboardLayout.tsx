@@ -31,7 +31,7 @@ function DashboardLayout({ children }: Props) {
     router.push("/api/auth/logout");
   };
   const collapseItems = [
-    { name: "Dashboard", path: "/" },
+    { name: "Dashboard", path: "/dashboard" },
     { name: "Send Form", path: "/dashboard/send-form" },
     { name: "Manage Recruitments", path: "/dashboard/manage-recruitments" },
   ];
@@ -41,7 +41,7 @@ function DashboardLayout({ children }: Props) {
     <div className="flex flex-col sm:h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
-        <Link href="/">
+        <Link href="/dashboard">
           <Navbar.Brand
             className="cursor-pointer flex items-center"
             css={{
