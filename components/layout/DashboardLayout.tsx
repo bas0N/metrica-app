@@ -43,7 +43,7 @@ function DashboardLayout({ children }: Props) {
     "Log Out",
   ];
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col sm:h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
         <Link href="/">
