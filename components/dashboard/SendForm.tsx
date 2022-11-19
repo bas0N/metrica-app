@@ -83,12 +83,13 @@ function SendFormToApplicant({
     }),
   };
   return (
-    <div className="py-4 px-10 h-full max-w-[800px]">
+    <div className="py-4 px-10 h-full  max-w-[800px] w-full gap-10 mx-auto">
       <ToastContainer />
+      <Text className="text-4xl sm:text-5xl  font-bold">
+        Provide candidate details
+      </Text>
 
-      <Text className="text-5xl  font-bold">Provide candidate details</Text>
-
-      <Grid.Container className="grid grid-cols-2 mt-16 gap-10 w-full ">
+      <Grid.Container className="grid sm:grid-cols-2 mt-16 gap-10 w-full ">
         <Input
           value={candidateFirstName}
           onChange={handleFirstNameChange}

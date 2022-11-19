@@ -17,11 +17,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 function SendForm({ recruitments }: { recruitments: Recruitment[] }) {
   const { user, error, isLoading } = useUser();
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      router.replace("/");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.replace("/");
+  //   }
+  // }, [user]);
   if (isLoading) {
     //add isLoading component
     return <div></div>;
