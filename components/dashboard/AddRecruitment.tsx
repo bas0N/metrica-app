@@ -38,8 +38,8 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     console.log("inside components");
     console.log(recruitments);
     setIsMobile(Mobile());
-    console.log(Mobile());
-  }, [window.innerWidth]);
+    console.log("ismobile: ", Mobile());
+  }, []);
   const handleInputChange = (event: React.ChangeEvent<FormElement>) => {
     const { name, value } = event.target;
     setValues({

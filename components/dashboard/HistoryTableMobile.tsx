@@ -82,7 +82,7 @@ function HistoryTableMobile({
     }
   };
   return (
-    <div className="flex flex-col mx-auto justify-center items-center">
+    <div className="flex flex-col mx-auto justify-center items-center mb-8">
       <ToastContainer />
       <div className="flex flex-col">
         <Collapse.Group splitted>

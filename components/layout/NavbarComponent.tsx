@@ -31,11 +31,11 @@ function NavbarComponent() {
   const { user, error, isLoading } = useUser();
 
   useEffect(() => {
-    console.log(user);
-    if (error) {
-      console.log("error in navbar");
-      router.replace("/");
-    }
+    // console.log(user);
+    // if (error) {
+    //   console.log("error in navbar");
+    //   router.replace("/");
+    // }
     if (user) {
       setUserState(user);
     }
