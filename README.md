@@ -1,4 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Description
+The main purpose of this app is to manage and run the application dedicated for signed-in users.
+
+
+
+
 
 ## Getting Started
 
