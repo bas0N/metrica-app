@@ -33,8 +33,28 @@ function InitForm({ user }: { user: any }) {
     console.log(JSON.stringify(recruitmentId!));
     //check if exists in the db and is available; else redirect
   });
-  const handleSubmit = () => {
-    router.replace("/form");
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:3001/survey/changeSurveyState`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: "6370918129a3e52f13f54966",
+            newStatus: "PENDING",
+          }),
+        }
+      );
+      if (res.status == 400 || 500) {
+        console.log("error");
+      }
+      console.log(await res.json());
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleCancel = () => {
     router.replace("/");
@@ -52,7 +72,7 @@ function InitForm({ user }: { user: any }) {
           <h1 className="text-7xl mb-10">{`Dear ${user.candidateFirstName}`}</h1>
           <h2 className="flex gap-1 mb-7">
             Thank you for applying as:
-            <h3 className="font-bold">{user.recruitment.recruitmentName}</h3>
+            <p className="font-bold">{user.recruitment.recruitmentName}</p>
           </h2>
           <p className=" mb-8 ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
