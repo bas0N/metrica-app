@@ -20,13 +20,33 @@ import nodejs from "../../shared/svg/nodejs.svg";
 import { useTheme as useNextTheme } from "next-themes";
 
 import Image from "next/image";
-import Technologies from "../../components/form/Technologies";
-import AboutYou from "../../components/form/AboutYou";
-import Links from "../../components/form/PersonalLinks";
-import PersonalLinks from "../../components/form/PersonalLinks";
-import { SelectProps } from "../../components/input/Select";
-import { SurveyType } from "../../types/survey";
-function index() {
+import Technologies from "../../../components/form/Technologies";
+import AboutYou from "../../../components/form/AboutYou";
+import Links from "../../../components/form/PersonalLinks";
+import PersonalLinks from "../../../components/form/PersonalLinks";
+import { SelectProps } from "../../../components/input/Select";
+import { SurveyStatus, SurveyType } from "../../../types/survey";
+import { GetServerSidePropsContext } from "next";
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  console.log(context.params?.recruitmentId);
+  if (context.params?.recruitmentId) {
+    const res = await fetch(
+      `http://localhost:3001/survey/${context.params.recruitmentId}`
+    );
+    if (res.status == 400 || 500) {
+      console.log("error");
+    }
+    //add types
+    const survey: any = await res.json();
+    return {
+      props: { survey },
+    };
+  }
+  return {
+    props: {},
+  };
+}
+function index({ survey }: { survey: any }) {
   // const { setTheme } = useNextTheme();
   // const { isDark, type } = useTheme();
   // <Switch
@@ -37,11 +57,17 @@ function index() {
   const typeOfForm: SurveyType = 1;
   const name: string = "Elon";
   const companyName: string = "Tesla";
+  const submitForm = async () => {
+    console.log("submit form successfully");
+  };
   return (
     <Container>
       <div className=" flex flex-col">
         <div className="flex justify-between items-center">
-          <h1 className="text-8xl font-bold">FORM</h1>
+          <h1 className="text-5xl font-bold">FORM</h1>
+          <h1 className="text-8xl font-bold">
+            {SurveyType[survey.recruitment.surveyType]}
+          </h1>
         </div>
         <h3>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -53,13 +79,18 @@ function index() {
         </h3>
         <h2 className="text-6xl font-light mt-4">PART 1: Technologies</h2>
 
-        <Technologies />
+        <Technologies typeOfForm={survey.recruitment.surveyType} />
         <h2 className="text-6xl font-light mt-6">PART 2: About You</h2>
         <AboutYou />
         <h2 className="text-6xl font-light mt-6">PART 3: Links</h2>
         <PersonalLinks />
       </div>
-      <Button className="my-10" shadow color="success">
+      <Button
+        onClick={submitForm}
+        className="my-10 bg-green-500"
+        shadow
+        color="success"
+      >
         Submit
       </Button>
     </Container>

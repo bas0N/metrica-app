@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
-import ConfirmationModal from "../../components/modals/ConfirmationModal";
+import ConfirmationModal from "../../../components/modals/ConfirmationModal";
 import { GetServerSidePropsContext } from "next";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   console.log(context.params?.recruitmentId);
@@ -14,16 +14,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       console.log("error");
     }
     //add types
-    const user: any = await res.json();
+    const survey: any = await res.json();
     return {
-      props: { user },
+      props: { survey },
     };
   }
   return {
     props: {},
   };
 }
-function InitForm({ user }: { user: any }) {
+function InitForm({ survey }: { survey: any }) {
   const [formId, setFormId] = useState("");
   const router = useRouter();
 
@@ -34,27 +34,8 @@ function InitForm({ user }: { user: any }) {
     //check if exists in the db and is available; else redirect
   });
   const handleSubmit = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:3001/survey/changeSurveyState`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: "6370918129a3e52f13f54966",
-            newStatus: "PENDING",
-          }),
-        }
-      );
-      if (res.status == 400 || 500) {
-        console.log("error");
-      }
-      console.log(await res.json());
-    } catch (err) {
-      console.log(err);
-    }
+    router.replace(`/form/fill-form/${router.query.recruitmentId}`);
+    console.log("esa");
   };
   const handleCancel = () => {
     router.replace("/");
@@ -69,10 +50,10 @@ function InitForm({ user }: { user: any }) {
           />
         </div>
         <div>
-          <h1 className="text-7xl mb-10">{`Dear ${user.candidateFirstName}`}</h1>
+          <h1 className="text-7xl mb-10">{`Dear ${survey.candidateFirstName}`}</h1>
           <h2 className="flex gap-1 mb-7">
             Thank you for applying as:
-            <p className="font-bold">{user.recruitment.recruitmentName}</p>
+            <p className="font-bold">{survey.recruitment.recruitmentName}</p>
           </h2>
           <p className=" mb-8 ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -83,7 +64,7 @@ function InitForm({ user }: { user: any }) {
             pariatur.
           </p>
           <h4 className="font-bold mb-2">
-            Questionaire deadline: {user.recruitment.recruitmentDeadline}
+            Questionaire deadline: {survey.recruitment.recruitmentDeadline}
           </h4>
           <div className="flex gap-3">
             <ConfirmationModal

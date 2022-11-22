@@ -36,8 +36,9 @@ import adobeXd from "../../assets/svg/logos/adobe-xd.svg";
 import sketch from "../../assets/svg/logos/sketch.svg";
 import adobeIlustrator from "../../assets/svg/logos/adobe-illustrator.svg";
 import zepelin from "../../assets/svg/logos/zeplin.svg";
+import { SurveyType } from "../../types/survey";
 
-function Technologies() {
+function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
   return (
     <div className=" flex flex-col ">
       <h2 className="text-3xl mt-10 font-extrabold border-b-2">
@@ -101,6 +102,7 @@ function Technologies() {
           </Tooltip>{" "}
         </Grid>
       </Grid.Container>
+
       <h2 className="text-3xl mt-10 font-extrabold border-b-2">Backend</h2>
 
       <Grid.Container gap={4}>
