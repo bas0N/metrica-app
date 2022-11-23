@@ -41,16 +41,16 @@ function InitForm({ survey }: { survey: any }) {
     router.replace("/");
   };
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen mx-3">
       <div className="grid sm:grid-cols-2">
         <div className=" flex justify-center items-center">
           <img
-            className="lg:w-[70%]"
+            className="lg:w-[70%] mx-auto"
             src="https://drive.google.com/uc?export=view&id=1dozKTbPG0g6hgbMbGpVmw5NAkjCjODjG"
           />
         </div>
         <div>
-          <h1 className="text-7xl mb-10">{`Dear ${survey.candidateFirstName}`}</h1>
+          <h1 className=" text-6xl sm:text-7xl my-10">{`Dear ${survey.candidateFirstName}`}</h1>
           <h2 className="flex gap-1 mb-7">
             Thank you for applying as:
             <p className="font-bold">{survey.recruitment.recruitmentName}</p>
