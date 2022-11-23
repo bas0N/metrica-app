@@ -40,189 +40,212 @@ import { SurveyType } from "../../types/survey";
 
 function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
   return (
-    <div className=" flex flex-col ">
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">
-        Programming Languages
-      </h2>
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={javascript} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={typescript} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={python} />
-          </Tooltip>
-        </Grid>
+    <div className=" flex flex-col  ">
+      <div>
+        <h2 className="text-3xl mt-10 font-extrabold border-b-2">
+          Programming Languages
+        </h2>
+        <Grid.Container justify="space-around" gap={4}>
+          <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+            <Tooltip content={"Developers love Next.js"}>
+              <Image width={40} height={40} src={javascript} />
+            </Tooltip>{" "}
+          </Grid>
+          <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+            <Tooltip content={"AWS"}>
+              <Image width={40} height={40} src={typescript} />
+            </Tooltip>{" "}
+          </Grid>
+          <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+            <Tooltip content={"Developers love Next.js"}>
+              <Image width={40} height={40} src={python} />
+            </Tooltip>
+          </Grid>
 
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={go} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={java} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">Frontend</h2>
+          <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+            <Tooltip content={"Developers love Next.js"}>
+              <Image width={40} height={40} src={go} />
+            </Tooltip>{" "}
+          </Grid>
+          <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+            <Tooltip content={"Developers love Next.js"}>
+              <Image width={40} height={40} src={java} />
+            </Tooltip>{" "}
+          </Grid>
+        </Grid.Container>
+      </div>
 
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={react} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={vue} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={angular} />
-          </Tooltip>{" "}
-        </Grid>
+      {typeOfForm == SurveyType["FRONTEND"] && (
+        <div>
+          {" "}
+          <h2 className="text-3xl mt-10 font-extrabold border-b-2">Frontend</h2>
+          <Grid.Container justify="space-around" gap={4}>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={react} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={vue} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={angular} />
+              </Tooltip>{" "}
+            </Grid>
 
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={css} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={svelte} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={css} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={svelte} />
+              </Tooltip>{" "}
+            </Grid>
+          </Grid.Container>
+        </div>
+      )}
+      {typeOfForm == SurveyType["FRONTEND"] && (
+        <div>
+          <h2 className="text-3xl mt-10 font-extrabold border-b-2">Backend</h2>
+          <Grid.Container justify="space-around" gap={4}>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={nodejs} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={express} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={graphql} />
+              </Tooltip>{" "}
+            </Grid>
 
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">Backend</h2>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={nginx} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"Developers love Next.js"}>
+                <Image width={40} height={40} src={kafka} />
+              </Tooltip>{" "}
+            </Grid>
+          </Grid.Container>
+        </div>
+      )}
+      {(typeOfForm == SurveyType["BACKEND"] ||
+        typeOfForm == SurveyType["DEVOPS"]) && (
+        <div>
+          <h2 className="text-3xl mt-10 font-extrabold border-b-2">
+            Databases
+          </h2>
 
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={nodejs} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={express} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={graphql} />
-          </Tooltip>{" "}
-        </Grid>
+          <Grid.Container justify="space-around" gap={4}>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={postgresql} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={mongodb} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={mysql} />
+              </Tooltip>{" "}
+            </Grid>
 
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={nginx} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"Developers love Next.js"}>
-            <Image width={40} height={40} src={kafka} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">Databases</h2>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={redis} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={mariadb} />
+              </Tooltip>{" "}
+            </Grid>
+          </Grid.Container>
+        </div>
+      )}
 
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={postgresql} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={mongodb} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={mysql} />
-          </Tooltip>{" "}
-        </Grid>
+      {typeOfForm == SurveyType["DEVOPS"] && (
+        <div>
+          <h2 className="text-3xl mt-10 font-extrabold border-b-2">DevOps</h2>
+          <Grid.Container justify="space-around" gap={4}>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={aws} />
+              </Tooltip>
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={azure} />
+              </Tooltip>
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={kubernetes} />
+              </Tooltip>{" "}
+            </Grid>
 
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={redis} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={mariadb} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">DevOps</h2>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={firebase} />
+              </Tooltip>{" "}
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={docker} />
+              </Tooltip>{" "}
+            </Grid>
+          </Grid.Container>
+        </div>
+      )}
+      {typeOfForm == SurveyType["UXUI"] && (
+        <div>
+          <h2 className="text-3xl mt-10 font-extrabold border-b-2">UX/UI</h2>
+          <Grid.Container justify="space-around" gap={4}>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={figma} />
+              </Tooltip>
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={adobeIlustrator} />
+              </Tooltip>
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={adobeXd} />
+              </Tooltip>
+            </Grid>
 
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={aws} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={azure} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={kubernetes} />
-          </Tooltip>{" "}
-        </Grid>
-
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={firebase} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={docker} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
-      <h2 className="text-3xl mt-10 font-extrabold border-b-2">UX/UI</h2>
-
-      <Grid.Container gap={4}>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={figma} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={adobeIlustrator} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={adobeXd} />
-          </Tooltip>{" "}
-        </Grid>
-
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={sketch} />
-          </Tooltip>{" "}
-        </Grid>
-        <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
-          <Tooltip content={"AWS"}>
-            <Image width={40} height={40} src={zepelin} />
-          </Tooltip>{" "}
-        </Grid>
-      </Grid.Container>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={sketch} />
+              </Tooltip>
+            </Grid>
+            <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
+              <Tooltip content={"AWS"}>
+                <Image width={40} height={40} src={zepelin} />
+              </Tooltip>
+            </Grid>
+          </Grid.Container>
+        </div>
+      )}
     </div>
   );
 }
