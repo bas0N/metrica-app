@@ -11,7 +11,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       `http://localhost:3001/survey/${context.params.recruitmentId}`
     );
     if (res.status == 400 || 500) {
-      console.log("error");
+      console.log("error while fetching form data");
     }
     //add types
     const survey: any = await res.json();
@@ -34,11 +34,16 @@ function InitForm({ survey }: { survey: any }) {
     //check if exists in the db and is available; else redirect
   });
   const handleSubmit = async () => {
-    router.replace(`/form/fill-form/${router.query.recruitmentId}`);
-    console.log("esa");
+    console.log("dupa");
+    //router.replace(`/form/fill-form/${router.query.recruitmentId}`);
+    //console.log("esa");
+    const res = await fetch(
+      `http://localhost:3001/survey/${router.query.recruitmentId}`
+    );
+    console.log(await res.json());
   };
   const handleCancel = () => {
-    router.replace("/");
+    router.replace("http://localhost:3000/");
   };
   return (
     <div className="flex flex-col justify-center items-center h-screen mx-3">

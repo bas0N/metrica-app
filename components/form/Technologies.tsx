@@ -1,7 +1,7 @@
-import { Grid, Tooltip } from "@nextui-org/react";
+import { Checkbox, Grid, Tooltip } from "@nextui-org/react";
 import Image from "next/image";
 
-import React from "react";
+import React, { MouseEventHandler, useState } from "react";
 import javascript from "../../assets/svg/logos/javascript.svg";
 import typescript from "../../assets/svg/logos/typescript-icon.svg";
 import go from "../../assets/svg/logos/go.svg";
@@ -49,7 +49,7 @@ function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
           <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
             <Tooltip content={"Developers love Next.js"}>
               <Image width={40} height={40} src={javascript} />
-            </Tooltip>{" "}
+            </Tooltip>
           </Grid>
           <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
             <Tooltip content={"AWS"}>
@@ -74,37 +74,69 @@ function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
           </Grid>
         </Grid.Container>
       </div>
-
+      <Checkbox.Group
+        label="Select technology"
+        color="success"
+        orientation="horizontal"
+        defaultValue={["buenos-aires"]}
+        className="overflow-auto w-max mx-auto"
+        size="xl"
+      >
+        <Checkbox value="buenos-aires">
+          <Tooltip content={"Developers love Next.js"}>
+            <Image width={40} height={40} src={javascript} />
+          </Tooltip>
+        </Checkbox>
+        <Checkbox value="sydney">
+          <Tooltip content={"AWS"}>
+            <Image width={40} height={40} src={typescript} />
+          </Tooltip>{" "}
+        </Checkbox>
+        <Checkbox value="london">
+          <Tooltip content={"Developers love Next.js"}>
+            <Image width={40} height={40} src={python} />
+          </Tooltip>
+        </Checkbox>
+        <Checkbox value="tokyo">
+          <Tooltip content={"Developers love Next.js"}>
+            <Image width={40} height={40} src={go} />
+          </Tooltip>
+        </Checkbox>
+        <Checkbox value="elo">
+          <Tooltip content={"Developers love Next.js"}>
+            <Image width={40} height={40} src={java} />
+          </Tooltip>
+        </Checkbox>
+      </Checkbox.Group>
       {typeOfForm == SurveyType["FRONTEND"] && (
         <div>
-          {" "}
           <h2 className="text-3xl mt-10 font-extrabold border-b-2">Frontend</h2>
           <Grid.Container justify="space-around" gap={4}>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={react} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={vue} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={angular} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
 
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={css} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={svelte} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
           </Grid.Container>
         </div>
@@ -116,28 +148,28 @@ function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={nodejs} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={express} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={graphql} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
 
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={nginx} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"Developers love Next.js"}>
                 <Image width={40} height={40} src={kafka} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
           </Grid.Container>
         </div>
@@ -197,13 +229,13 @@ function Technologies({ typeOfForm }: { typeOfForm: SurveyType }) {
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"AWS"}>
                 <Image width={40} height={40} src={kubernetes} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
 
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"AWS"}>
                 <Image width={40} height={40} src={firebase} />
-              </Tooltip>{" "}
+              </Tooltip>
             </Grid>
             <Grid className="hover:bg-gray-300/[.2]  rounded-lg">
               <Tooltip content={"AWS"}>
