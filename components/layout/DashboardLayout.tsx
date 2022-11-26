@@ -41,7 +41,7 @@ function DashboardLayout({ children }: Props) {
     <div className="flex flex-col sm:h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
-        <Link href="/dashboard">
+        <Link href="http://localhost:3000/">
           <Navbar.Brand
             className="cursor-pointer flex items-center"
             css={{

@@ -64,35 +64,39 @@ function index({ survey }: { survey: any }) {
     <Container>
       <div className=" flex flex-col">
         <div className="flex justify-between items-center">
-          <h1 className="text-5xl font-bold">FORM</h1>
-          <h1 className="text-8xl font-bold">
-            {SurveyType[survey.recruitment.surveyType]}
-          </h1>
+          <h1 className="text-5xl sm:text-7xl font-bold my-4 ">FORM</h1>
         </div>
         <h3>
+          Current form is of type{" "}
+          {SurveyType[survey.recruitment.surveyType] + ". "}
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+          aliquip ex ea commodo consequat.
         </h3>
-        <h2 className="text-6xl font-light mt-4">PART 1: Technologies</h2>
+        <h2 className="text-4xl sm:text-6xl font-light mt-6">
+          PART 1: Technologies
+        </h2>
 
         <Technologies typeOfForm={survey.recruitment.surveyType} />
-        <h2 className="text-6xl font-light mt-6">PART 2: About You</h2>
+        <h2 className="text-4xl sm:text-6xl font-light mt-6">
+          PART 2: About You
+        </h2>
         <AboutYou />
-        <h2 className="text-6xl font-light mt-6">PART 3: Links</h2>
+        <h2 className="text-4xl sm:text-6xl font-light mt-6">PART 3: Links</h2>
         <PersonalLinks />
       </div>
-      <Button
-        onClick={submitForm}
-        className="my-10 bg-green-500"
-        shadow
-        color="success"
-      >
-        Submit
-      </Button>
+      <div className="w-full flex items-center justify-center">
+        {" "}
+        <Button
+          onClick={submitForm}
+          className="my-10 bg-green-500"
+          shadow
+          color="success"
+        >
+          Submit
+        </Button>
+      </div>
     </Container>
   );
 }

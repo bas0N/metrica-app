@@ -11,7 +11,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       `http://localhost:3001/survey/${context.params.recruitmentId}`
     );
     if (res.status == 400 || 500) {
-      console.log("error");
+      console.log("error while fetching form data");
     }
     //add types
     const survey: any = await res.json();
@@ -34,23 +34,28 @@ function InitForm({ survey }: { survey: any }) {
     //check if exists in the db and is available; else redirect
   });
   const handleSubmit = async () => {
-    router.replace(`/form/fill-form/${router.query.recruitmentId}`);
-    console.log("esa");
+    console.log("dupa");
+    //router.replace(`/form/fill-form/${router.query.recruitmentId}`);
+    //console.log("esa");
+    const res = await fetch(
+      `http://localhost:3001/survey/${router.query.recruitmentId}`
+    );
+    console.log(await res.json());
   };
   const handleCancel = () => {
-    router.replace("/");
+    router.replace("http://localhost:3000/");
   };
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen mx-3">
       <div className="grid sm:grid-cols-2">
         <div className=" flex justify-center items-center">
           <img
-            className="lg:w-[70%]"
+            className="lg:w-[70%] mx-auto"
             src="https://drive.google.com/uc?export=view&id=1dozKTbPG0g6hgbMbGpVmw5NAkjCjODjG"
           />
         </div>
         <div>
-          <h1 className="text-7xl mb-10">{`Dear ${survey.candidateFirstName}`}</h1>
+          <h1 className=" text-6xl sm:text-7xl my-10">{`Dear ${survey.candidateFirstName}`}</h1>
           <h2 className="flex gap-1 mb-7">
             Thank you for applying as:
             <p className="font-bold">{survey.recruitment.recruitmentName}</p>

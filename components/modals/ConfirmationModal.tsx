@@ -20,9 +20,13 @@ export default function ConfirmationModal({
     setVisible(false);
     console.log("closed");
   };
-  const submitHandler = () => {
-    funct();
-    closeHandler();
+  const submitHandler = async () => {
+    try {
+      await funct();
+      closeHandler();
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div>
