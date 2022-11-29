@@ -56,7 +56,7 @@ export type TechnologiesSurveyType = {
 
 export type AboutYouSurveyType = {
   position: string;
-  yearsOfExperiece: string;
+  yearsOfExperience: string;
   description: string;
 };
 

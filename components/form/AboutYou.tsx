@@ -1,5 +1,5 @@
 import { Textarea, useTheme } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AboutYouSurveyType } from "../../types/survey";
 import Select from "../input/Select";
 interface SelectProps {
@@ -30,15 +30,25 @@ function AboutYou({
     React.SetStateAction<AboutYouSurveyType | undefined>
   >;
 }) {
+  const [description, setDescription] = useState<string>("");
+  const [position, setPosition] = useState<string>("");
+  const [yearsOfExperience, setYearsOfExperience] = useState<string>("");
+
   const { isDark, type } = useTheme();
+  useEffect(() => {
+    setAboutYou({ position, yearsOfExperience, description });
+  }, [description, position, yearsOfExperience]);
   return (
     <div className="flex flex-col">
-      <Select {...selectPropsYears} />
-      <Select {...selectPropsPosition} />
+      <Select handler={setYearsOfExperience} {...selectPropsYears} />
+      <Select handler={setPosition} {...selectPropsPosition} />
       <Textarea
         className="mt-4"
         label="Write your thoughts"
-        placeholder="Enter your amazing ideas."
+        placeholder="Write something about yourself."
+        onChange={(e) => {
+          setDescription(e.target.value);
+        }}
       />
     </div>
   );

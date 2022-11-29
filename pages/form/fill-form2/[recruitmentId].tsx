@@ -32,7 +32,10 @@ import {
   SurveyType,
   TechnologiesSurveyType,
 } from "../../../types/survey";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   //get info about the recruitment
   console.log(context.params?.recruitmentId);
@@ -58,12 +61,23 @@ function index({ survey }: { survey: any }) {
   const [technologies, setTechnologies] = useState<TechnologiesSurveyType>();
   const [aboutYou, setAboutYou] = useState<AboutYouSurveyType>();
   const [personalLinks, setPersonalLinks] = useState<PersonalLinksSurveyType>();
+  const router = useRouter();
 
   const onSubmit = () => {
     console.log(technologies);
+    console.log(aboutYou);
+    console.log(personalLinks);
+    //success toaster
+    toast.success("Form filled successfully.", { theme: "dark" });
+    setTimeout(() => {
+      router.push("http://localhost:3000");
+    }, 2000);
+    //redirect to main page
   };
   return (
     <Container>
+      <ToastContainer />
+
       <div className=" flex flex-col">
         <div className="flex justify-between items-center">
           <h1 className="text-5xl sm:text-7xl font-bold my-4 ">FORM</h1>
