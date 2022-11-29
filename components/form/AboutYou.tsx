@@ -1,5 +1,6 @@
 import { Textarea, useTheme } from "@nextui-org/react";
 import React from "react";
+import { AboutYouSurveyType } from "../../types/survey";
 import Select from "../input/Select";
 interface SelectProps {
   command: string;
@@ -22,7 +23,13 @@ const selectPropsPosition: SelectProps = {
     { desc: "Senior", value: "4" },
   ],
 };
-function AboutYou() {
+function AboutYou({
+  setAboutYou,
+}: {
+  setAboutYou: React.Dispatch<
+    React.SetStateAction<AboutYouSurveyType | undefined>
+  >;
+}) {
   const { isDark, type } = useTheme();
   return (
     <div className="flex flex-col">

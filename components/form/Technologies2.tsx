@@ -36,10 +36,18 @@ import adobeXd from "../../assets/svg/logos/adobe-xd.svg";
 import sketch from "../../assets/svg/logos/sketch.svg";
 import adobeIlustrator from "../../assets/svg/logos/adobe-illustrator.svg";
 import zepelin from "../../assets/svg/logos/zeplin.svg";
-import { SurveyType } from "../../types/survey";
+import { SurveyType, TechnologiesSurveyType } from "../../types/survey";
 import { type } from "os";
 
-function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
+function Technologies2({
+  typeOfForm,
+  setTechnologies,
+}: {
+  typeOfForm: SurveyType;
+  setTechnologies: React.Dispatch<
+    React.SetStateAction<TechnologiesSurveyType | undefined>
+  >;
+}) {
   const [isMobile, setIsMobile] = useState(true);
 
   const Mobile = () => {
@@ -60,15 +68,11 @@ function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
   const [backend, setBackend] = useState<string[]>([]);
   const [devops, setDevops] = useState<string[]>([]);
   const [databases, setDatabases] = useState<string[]>([]);
-
   const [uxui, setUxui] = useState<string[]>([]);
   useEffect(() => {
-    console.log("ismobile: ", Mobile());
-    setIsMobile(Mobile());
-    console.log("languages are: ", languages);
-  }, [languages]);
+    setTechnologies({ languages, frontend, backend, devops, databases, uxui });
+  }, [languages, frontend, backend, devops, databases, uxui]);
 
-  const onSubmit = () => {};
   return (
     <div className=" flex flex-col mt-3  ">
       <h2 className="text-3xl mt-10 font-extralight border-b-2">

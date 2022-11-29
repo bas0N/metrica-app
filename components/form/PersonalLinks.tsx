@@ -1,7 +1,14 @@
 import { Input } from "@nextui-org/react";
 import React from "react";
+import { PersonalLinksSurveyType } from "../../types/survey";
 
-function PersonalLinks() {
+function PersonalLinks({
+  setPersonalLinks,
+}: {
+  setPersonalLinks: React.Dispatch<
+    React.SetStateAction<PersonalLinksSurveyType | undefined>
+  >;
+}) {
   return (
     <div className="flex flex-col">
       <h2 className="text-3xl mt-10 font-extrabold">Github</h2>

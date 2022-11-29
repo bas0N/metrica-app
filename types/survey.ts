@@ -44,3 +44,24 @@ export type GetSurveysPaginated = {
   pagesAvailable: number;
   totalItems: number;
 };
+
+export type TechnologiesSurveyType = {
+  languages: string[];
+  frontend: string[];
+  backend: string[];
+  devops: string[];
+  databases: string[];
+  uxui: string[];
+};
+
+export type AboutYouSurveyType = {
+  position: string;
+  yearsOfExperiece: string;
+  description: string;
+};
+
+export type PersonalLinksSurveyType = {
+  githubUrl: string;
+  linkedinUrl: string;
+  repositoryUrl: string;
+};
