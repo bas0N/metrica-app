@@ -63,16 +63,37 @@ function index({ survey }: { survey: any }) {
   const [personalLinks, setPersonalLinks] = useState<PersonalLinksSurveyType>();
   const router = useRouter();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(technologies);
     console.log(aboutYou);
     console.log(personalLinks);
     //success toaster
-    toast.success("Form filled successfully.", { theme: "dark" });
-    setTimeout(() => {
-      router.push("http://localhost:3000");
-    }, 2000);
-    //redirect to main page
+    const fillForm = await fetch(
+      `http://localhost:3001/survey/fillSurvey/${survey._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          technologiesSurvey: technologies,
+          aboutYouSurvey: aboutYou,
+          personalLinksSurvey: personalLinks,
+        }),
+      }
+    );
+    console.log("the status is:", fillForm.status);
+    if (fillForm.status == 200) {
+      toast.success("Form filled successfully.", { theme: "dark" });
+      //redirect to main page
+      setTimeout(() => {
+        router.push("http://localhost:3000");
+      }, 5000);
+      return;
+    }
+
+    toast.error("Error while sending form.", { theme: "dark" });
+    return;
   };
   return (
     <Container>

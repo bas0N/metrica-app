@@ -37,10 +37,15 @@ function InitForm({ survey }: { survey: any }) {
     console.log("dupa");
     //router.replace(`/form/fill-form/${router.query.recruitmentId}`);
     //console.log("esa");
-    const res = await fetch(
-      `http://localhost:3001/survey/${router.query.recruitmentId}`
-    );
-    console.log(await res.json());
+    try {
+      const res = await fetch(
+        `http://localhost:3001/survey/${router.query.recruitmentId}`
+      );
+      console.log(await res);
+    } catch (e) {
+      console.dir(e);
+      console.log(e.error);
+    }
   };
   const handleCancel = () => {
     router.replace("http://localhost:3000/");
