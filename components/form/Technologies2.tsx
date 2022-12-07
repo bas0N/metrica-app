@@ -1,4 +1,4 @@
-import { Checkbox, Grid, Tooltip, Text } from "@nextui-org/react";
+import { Checkbox, Grid, Tooltip, Text, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 
 import React, { MouseEventHandler, useEffect, useState } from "react";
@@ -36,10 +36,18 @@ import adobeXd from "../../assets/svg/logos/adobe-xd.svg";
 import sketch from "../../assets/svg/logos/sketch.svg";
 import adobeIlustrator from "../../assets/svg/logos/adobe-illustrator.svg";
 import zepelin from "../../assets/svg/logos/zeplin.svg";
-import { SurveyType } from "../../types/survey";
+import { SurveyType, TechnologiesSurveyType } from "../../types/survey";
 import { type } from "os";
 
-function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
+function Technologies2({
+  typeOfForm,
+  setTechnologies,
+}: {
+  typeOfForm: SurveyType;
+  setTechnologies: React.Dispatch<
+    React.SetStateAction<TechnologiesSurveyType | undefined>
+  >;
+}) {
   const [isMobile, setIsMobile] = useState(true);
 
   const Mobile = () => {
@@ -53,145 +61,160 @@ function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
     console.log("window undefined");
     return false;
   };
+
+  //states
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [frontend, setFrontend] = useState<string[]>([]);
+  const [backend, setBackend] = useState<string[]>([]);
+  const [devops, setDevops] = useState<string[]>([]);
+  const [databases, setDatabases] = useState<string[]>([]);
+  const [uxui, setUxui] = useState<string[]>([]);
   useEffect(() => {
-    console.log("ismobile: ", Mobile());
-    setIsMobile(Mobile());
-  });
+    setTechnologies({ languages, frontend, backend, devops, databases, uxui });
+  }, [languages, frontend, backend, devops, databases, uxui]);
+
   return (
     <div className=" flex flex-col mt-3  ">
       <h2 className="text-3xl mt-10 font-extralight border-b-2">
         Programing language
       </h2>
+      <Spacer y={2} />
+
       <Checkbox.Group
-        label="Select your programming language"
         color="success"
         orientation={isMobile ? "vertical" : "horizontal"}
-        defaultValue={["buenos-aires"]}
         className="overflow-auto w-max mx-auto"
         size="xl"
+        onChange={setLanguages}
       >
-        <Checkbox value="js">
+        <Checkbox value="javascript">
           <div className="flex gap-4 ">
             <Image width={40} height={40} src={javascript} />
             <Text h2>Javascript</Text>
           </div>
         </Checkbox>
 
-        <Checkbox value="ts">
+        <Checkbox value="typescript">
           <div className="flex gap-4 ">
             <Image width={40} height={40} src={typescript} />
             <Text h2>Typescript</Text>
           </div>
         </Checkbox>
-        <Checkbox value="Python">
+        <Checkbox value="python">
           <div className="flex gap-4 ">
             <Image width={40} height={40} src={python} />
             <Text h2>Python</Text>
           </div>
         </Checkbox>
-        <Checkbox value="Go">
+        <Checkbox value="go">
           <div className="flex gap-4 ">
             <Image width={40} height={40} src={go} />
             <Text h2>Go</Text>
           </div>
         </Checkbox>
-        <Checkbox value="Java">
+        <Checkbox value="java">
           <div className="flex gap-4 ">
             <Image width={40} height={40} src={java} />
             <Text h2>Java</Text>
           </div>
         </Checkbox>
       </Checkbox.Group>
-      {typeOfForm == SurveyType["FRONTEND"] && (
+      <Spacer y={2} />
+
+      {typeOfForm == SurveyType["FRONTEND"] || (
         <div>
           <h2 className="text-3xl mt-10 font-extralight border-b-2">
             Frontend
           </h2>
+          <Spacer y={2} />
+
           <Checkbox.Group
-            label="Select your frontend technology"
             color="success"
             orientation={isMobile ? "vertical" : "horizontal"}
-            defaultValue={["buenos-aires"]}
             className="overflow-auto w-max mx-auto"
             size="xl"
+            onChange={setFrontend}
           >
-            <Checkbox value="js">
+            <Checkbox value="react">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={react} />
                 <Text h2>React</Text>
               </div>
             </Checkbox>
 
-            <Checkbox value="ts">
+            <Checkbox value="vue">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={vue} />
                 <Text h2>Vue</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Python">
+            <Checkbox value="css">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={css} />
                 <Text h2>CSS</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Go">
+            <Checkbox value="go">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={angular} />
                 <Text h2>Angular</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Java">
+            <Checkbox value="svelte">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={svelte} />
                 <Text h2>Svelte</Text>
               </div>
             </Checkbox>
           </Checkbox.Group>
+          <Spacer y={2} />
         </div>
       )}
       {typeOfForm == SurveyType["BACKEND"] && (
         <div>
           <h2 className="text-3xl mt-10 font-extralight border-b-2">Backend</h2>
+          <Spacer y={2} />
+
           <Checkbox.Group
-            label="Select your backend technology"
             color="success"
             orientation={isMobile ? "vertical" : "horizontal"}
-            defaultValue={["buenos-aires"]}
             className="overflow-auto w-max mx-auto"
             size="xl"
+            onChange={setBackend}
           >
-            <Checkbox value="js">
+            <Checkbox value="nodejs">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={nodejs} />
                 <Text h2>NodeJS</Text>
               </div>
             </Checkbox>
 
-            <Checkbox value="ts">
+            <Checkbox value="expressjs">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={express} />
                 <Text h2>ExpressJS</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Python">
+            <Checkbox value="graphql">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={graphql} />
                 <Text h2>GraphQL</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Go">
+            <Checkbox value="nginx">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={nginx} />
                 <Text h2>Nginx</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Java">
+            <Checkbox value="kafka">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={kafka} />
                 <Text h2>Kafka</Text>
               </div>
             </Checkbox>
           </Checkbox.Group>
+          <Spacer y={2} />
         </div>
       )}
       {(typeOfForm == SurveyType["BACKEND"] ||
@@ -200,47 +223,48 @@ function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
           <h2 className="text-3xl mt-10 font-extralight border-b-2">
             Databases
           </h2>
+          <Spacer y={2} />
 
           <Checkbox.Group
-            label="Select your databases technologies"
             color="success"
             orientation={isMobile ? "vertical" : "horizontal"}
-            defaultValue={["buenos-aires"]}
             className="overflow-auto w-max mx-auto"
             size="xl"
+            onChange={setDatabases}
           >
-            <Checkbox value="js">
+            <Checkbox value="postgresql">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={postgresql} />
                 <Text h2>PostgreSQL</Text>
               </div>
             </Checkbox>
 
-            <Checkbox value="ts">
+            <Checkbox value="mongodb">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={mongodb} />
                 <Text h2>MongoDB</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Python">
+            <Checkbox value="mysql">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={mysql} />
                 <Text h2>MySQL</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Go">
+            <Checkbox value="Redis">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={redis} />
                 <Text h2>Redis</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Java">
+            <Checkbox value="MariaDB">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={mariadb} />
                 <Text h2>MariaDB</Text>
               </div>
             </Checkbox>
           </Checkbox.Group>
+          <Spacer y={2} />
         </div>
       )}
 
@@ -251,42 +275,43 @@ function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
             label="Select your devops technology"
             color="success"
             orientation={isMobile ? "vertical" : "horizontal"}
-            defaultValue={["buenos-aires"]}
             className="overflow-auto w-max mx-auto"
             size="xl"
+            onChange={setDevops}
           >
-            <Checkbox value="js">
+            <Checkbox value="aws">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={aws} />
                 <Text h2>AWS</Text>
               </div>
             </Checkbox>
 
-            <Checkbox value="ts">
+            <Checkbox value="azure">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={azure} />
                 <Text h2>Azure</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Python">
+            <Checkbox value="kubernetes">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={kubernetes} />
                 <Text h2>Kubernetes</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Go">
+            <Checkbox value="firebase">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={firebase} />
                 <Text h2>Firebase</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Java">
+            <Checkbox value="docker">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={docker} />
                 <Text h2>Docker</Text>
               </div>
             </Checkbox>
           </Checkbox.Group>
+          <Spacer y={1} />
         </div>
       )}
       {typeOfForm == SurveyType["UXUI"] && (
@@ -296,42 +321,43 @@ function Technologies2({ typeOfForm }: { typeOfForm: SurveyType }) {
             label="Select your UX/UI technology"
             color="success"
             orientation={isMobile ? "vertical" : "horizontal"}
-            defaultValue={["buenos-aires"]}
             className="overflow-auto w-max mx-auto"
             size="xl"
+            onChange={setUxui}
           >
-            <Checkbox value="js">
+            <Checkbox value="figma">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={figma} />
                 <Text h2>Figma</Text>
               </div>
             </Checkbox>
 
-            <Checkbox value="ts">
+            <Checkbox value="Ilustrator">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={adobeIlustrator} />
                 <Text h2>Ilustrator</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Python">
+            <Checkbox value="xd">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={adobeXd} />
                 <Text h2>Xd</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Go">
+            <Checkbox value="sketch">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={sketch} />
                 <Text h2>Sketch</Text>
               </div>
             </Checkbox>
-            <Checkbox value="Java">
+            <Checkbox value="zeppelin">
               <div className="flex gap-4 ">
                 <Image width={40} height={40} src={zepelin} />
                 <Text h2>Zeppelin</Text>
               </div>
             </Checkbox>
           </Checkbox.Group>
+          <Spacer y={2} />
         </div>
       )}
     </div>
