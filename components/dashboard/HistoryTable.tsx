@@ -9,7 +9,10 @@ import {
   Pagination,
   Dropdown,
   Input,
+  Modal,
+  useModal,
 } from "@nextui-org/react";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -34,6 +37,9 @@ function HistoryTable({
   pagesAvailable: number;
   totalItems: number;
 }) {
+  const { setVisible, bindings } = useModal();
+
+  const [userDetails, setUserDetails] = useState({});
   const [surveysState, setSurveysState] = useState(surveys);
   //dropdown
   const [selected, setSelected] = React.useState<any>(new Set(["text"]));
@@ -56,6 +62,7 @@ function HistoryTable({
       position: survey.recruitment.recruitmentName,
       team: survey.recruitment.recruitmentId,
       status: SurveyStatus[survey.surveyStatus],
+      details: survey.surveyData || {},
       age: "24",
       deadline: survey.recruitment.recruitmentDeadline,
       avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
@@ -144,9 +151,17 @@ function HistoryTable({
       case "actions":
         return (
           <Row justify="center" align="center">
-            <Col css={{ d: "flex" }}>
+            <Col
+              className={`${survey.status == "FILLED" ? "flex" : "invisible"}`}
+            >
               <Tooltip content="Details">
-                <IconButton onClick={() => console.log("View user", survey.id)}>
+                <IconButton
+                  onClick={() => {
+                    console.log("View user", survey.id);
+                    setVisible(true);
+                    setUserDetails(survey.details);
+                  }}
+                >
                   <EyeIcon size={20} fill="#979797" />
                 </IconButton>
               </Tooltip>
@@ -179,6 +194,27 @@ function HistoryTable({
   };
   return (
     <div className="flex flex-col">
+      <Modal
+        scroll
+        width="600px"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        {...bindings}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18}>
+            Survey results
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+          <Text id="modal-description">{JSON.stringify(userDetails)}</Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button auto flat color="error" onClick={() => setVisible(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <ToastContainer />
       <div className=" m-4 grid grid-cols-2 gap-3">
         <div className="grid grid-cols-3 gap-1">

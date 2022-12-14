@@ -71,6 +71,7 @@ function Technologies2({
   const [uxui, setUxui] = useState<string[]>([]);
   useEffect(() => {
     setTechnologies({ languages, frontend, backend, devops, databases, uxui });
+    setIsMobile(Mobile());
   }, [languages, frontend, backend, devops, databases, uxui]);
 
   return (

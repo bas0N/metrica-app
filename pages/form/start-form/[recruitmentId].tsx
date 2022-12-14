@@ -12,6 +12,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     );
     if (res.status == 400 || 500) {
       console.log("error while fetching form data");
+      // return {
+      //   redirect: {
+      //     permanent: false,
+      //     destination: "http://localhost:3000/not-found",
+      //   },
+      //   props: {},
+      // };
     }
     //add types
     const survey: any = await res.json();
@@ -34,14 +41,16 @@ function InitForm({ survey }: { survey: any }) {
     //check if exists in the db and is available; else redirect
   });
   const handleSubmit = async () => {
-    console.log("dupa");
     //router.replace(`/form/fill-form/${router.query.recruitmentId}`);
     //console.log("esa");
     try {
-      const res = await fetch(
-        `http://localhost:3001/survey/${router.query.recruitmentId}`
+      // const res = await fetch(
+      //   `http://localhost:3001/survey/${router.query.recruitmentId}`
+      // );
+      //console.log(await res);
+      router.replace(
+        `http://localhost:3002/form/fill-form/${router.query.recruitmentId}`
       );
-      console.log(await res);
     } catch (e) {
       console.dir(e);
       console.log(e.error);
