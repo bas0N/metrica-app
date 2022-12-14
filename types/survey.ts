@@ -22,6 +22,11 @@ export type Survey = {
   recruitment: Recruitment;
   terminationDate: Date;
   creationDate: Date;
+  surveyData: {
+    technologiesSurvey: Object;
+    aboutYouSurvey: Object;
+    personalLinksSurvey: Object;
+  };
   __v: 0;
 };
 
