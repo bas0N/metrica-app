@@ -12,6 +12,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     );
     if (res.status == 400 || 500) {
       console.log("error while fetching form data");
+      return {
+        redirect: {
+          permanent: false,
+          destination: "http://localhost:3000/not-found",
+        },
+        props: {},
+      };
     }
     //add types
     const survey: any = await res.json();

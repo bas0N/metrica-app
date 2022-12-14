@@ -28,6 +28,7 @@ import { SelectProps } from "../../../components/input/Select";
 import {
   AboutYouSurveyType,
   PersonalLinksSurveyType,
+  Survey,
   SurveyStatus,
   SurveyType,
   TechnologiesSurveyType,
@@ -48,6 +49,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }
     //add types
     const survey: any = await res.json();
+    console.log(survey);
     return {
       props: { survey },
     };
@@ -88,7 +90,7 @@ function index({ survey }: { survey: any }) {
       //redirect to main page
       setTimeout(() => {
         router.push("http://localhost:3000");
-      }, 5000);
+      }, 3000);
       return;
     }
 
