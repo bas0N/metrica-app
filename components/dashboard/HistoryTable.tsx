@@ -39,7 +39,7 @@ function HistoryTable({
 }) {
   const { setVisible, bindings } = useModal();
 
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
   //dropdown
   const [selected, setSelected] = React.useState<any>(new Set(["text"]));
@@ -207,7 +207,120 @@ function HistoryTable({
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <Text id="modal-description">{JSON.stringify(userDetails)}</Text>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">Technologies</Text>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.languages) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Languages</Text>
+
+                  {userDetails.technologiesSurvey.languages.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.frontend) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Frontend</Text>
+
+                  {userDetails.technologiesSurvey.frontend.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.backend) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Backend</Text>
+
+                  {userDetails.technologiesSurvey.backend.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.devops) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Devops</Text>
+
+                  {userDetails.technologiesSurvey.devops.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.uxui) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">UXUI</Text>
+
+                  {userDetails.technologiesSurvey.uxui.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">About Candidate</Text>
+            <Text>Position: {userDetails.aboutYouSurvey?.position}</Text>
+            <Text>
+              Years of experience:
+              {userDetails.aboutYouSurvey?.yearsOfExperience}
+            </Text>
+            <Text>Description: {userDetails.aboutYouSurvey?.description}</Text>
+          </div>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">Personal Links</Text>
+            <div className="flex w-screen-sm justify-between mt-5">
+              <Button
+                className="bg-green-400/70 hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.githubUrl}`}
+              >
+                Github
+              </Button>
+              <Button
+                className="bg-green-400/70 hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.linkedinUrl}`}
+              >
+                Linkedin
+              </Button>
+              <Button
+                className="bg-green-400/70 hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.repositoryUrl}`}
+              >
+                Repository
+              </Button>
+            </div>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onClick={() => setVisible(false)}>
