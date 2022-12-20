@@ -60,7 +60,7 @@ function HistoryTable({
       id: survey._id,
       name: `${survey.candidateFirstName} ${survey.candidateLastName}`,
       position: survey.recruitment.recruitmentName,
-      team: survey.recruitment.recruitmentId,
+      recruitmentId: survey.recruitment.recruitmentId,
       status: SurveyStatus[survey.surveyStatus],
       details: survey.surveyData || {},
       age: "24",
@@ -131,7 +131,7 @@ function HistoryTable({
             </Row>
             <Row>
               <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
-                {survey.team}
+                {survey.id}
               </Text>
             </Row>
           </Col>
