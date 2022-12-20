@@ -5,9 +5,12 @@ import {
   Pagination,
   Tooltip,
   Spacer,
+  Modal,
+  useModal,
+  Button,
 } from "@nextui-org/react";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GetSurveysPaginated, Survey, SurveyStatus } from "../../types/survey";
 import { StyledBadge } from "../../components/table/StyledBadge";
 import { IconButton } from "../table/IconButton";
@@ -26,8 +29,9 @@ function HistoryTableMobile({
   pagesAvailable: number;
   totalItems: number;
 }) {
+  const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
-
+  const { setVisible, bindings } = useModal();
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
@@ -72,6 +76,146 @@ function HistoryTableMobile({
   };
   return (
     <div className="flex flex-col mx-auto justify-center items-center mb-8">
+      <Modal
+        scroll
+        width="600px"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        {...bindings}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18}>
+            Survey results
+          </Text>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">Technologies</Text>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.languages) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Languages</Text>
+
+                  {userDetails.technologiesSurvey.languages.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.frontend) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Frontend</Text>
+
+                  {userDetails.technologiesSurvey.frontend.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.backend) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Backend</Text>
+
+                  {userDetails.technologiesSurvey.backend.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.devops) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">Devops</Text>
+
+                  {userDetails.technologiesSurvey.devops.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div>
+              {Array.isArray(userDetails.technologiesSurvey?.uxui) ? (
+                <div className="flex flex-col">
+                  <Text className="font-bold">UXUI</Text>
+
+                  {userDetails.technologiesSurvey.uxui.map(
+                    (element: string) => (
+                      <Text className="text-green-500">{element}</Text>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">About Candidate</Text>
+            <Text>Position: {userDetails.aboutYouSurvey?.position}</Text>
+            <Text>
+              Years of experience:
+              {userDetails.aboutYouSurvey?.yearsOfExperience}
+            </Text>
+            <Text>Description: {userDetails.aboutYouSurvey?.description}</Text>
+          </div>
+          <div className="flex flex-col">
+            <Text className="font-bold text-2xl">Personal Links</Text>
+            <div className="flex flex-col w-screen-sm justify-between mt-5">
+              <Button
+                className="bg-green-400/70 my-2 hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.githubUrl}`}
+              >
+                Github
+              </Button>
+              <Button
+                className="bg-green-400/70 my-2 hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.linkedinUrl}`}
+              >
+                Linkedin
+              </Button>
+              <Button
+                className="bg-green-400/70 my-2  hover:bg-green-500/50"
+                size="sm"
+                href={`${userDetails.personalLinksSurvey?.repositoryUrl}`}
+              >
+                Repository
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="mx-auto"
+            auto
+            flat
+            color="error"
+            onClick={() => setVisible(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <ToastContainer />
       <div className="flex flex-col">
         <Collapse.Group splitted>
@@ -96,7 +240,11 @@ function HistoryTableMobile({
                   <div className="flex justify-between w-1/2">
                     <Tooltip content="Details">
                       <IconButton
-                        onClick={() => console.log("View user", survey._id)}
+                        onClick={() => {
+                          console.log("View user", survey.id);
+                          setVisible(true);
+                          setUserDetails(survey.surveyData);
+                        }}
                       >
                         <EyeIcon size={20} fill="#979797" />
                       </IconButton>
