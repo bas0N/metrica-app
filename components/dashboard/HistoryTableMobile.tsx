@@ -59,18 +59,7 @@ function HistoryTableMobile({
       console.log(err);
     }
   };
-  //   useEffect(() => {
-  //     const execute = async () => {
-  //       const res = await fetch(
-  //         `http://localhost:3001/survey/getSurveysPaginated/1`
-  //       );
-  //       const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
-  //         await res.json();
-  //       console.log(surveys);
-  //       setSurveys(surveys);
-  //     };
-  //     execute();
-  //   }, []);
+
   const handlePageChange = async (page: number) => {
     const res = await fetch(
       `http://localhost:3001/survey/getSurveysPaginated/${page}`
@@ -86,7 +75,7 @@ function HistoryTableMobile({
       <ToastContainer />
       <div className="flex flex-col">
         <Collapse.Group splitted>
-          {surveysState.map((survey) => (
+          {surveysState.map((survey: any) => (
             <Collapse
               title={
                 <Text h4>
@@ -101,37 +90,46 @@ function HistoryTableMobile({
                     <Text h4>{survey.recruitment.recruitmentName}</Text>
                     <Text h4>{survey.recruitment.recruitmentId}</Text>
                   </div>
-                  <StyledBadge type="FILLED">
-                    {SurveyStatus[survey.surveyStatus]}
-                  </StyledBadge>
                 </div>
                 <Spacer />
-                <div className="flex ">
-                  <Tooltip content="Details">
-                    <IconButton
-                      onClick={() => console.log("View user", survey._id)}
+                <div className="flex justify-between">
+                  <div className="flex justify-between w-1/2">
+                    <Tooltip content="Details">
+                      <IconButton
+                        onClick={() => console.log("View user", survey._id)}
+                      >
+                        <EyeIcon size={20} fill="#979797" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip content="Edit user">
+                      <IconButton
+                        onClick={() => console.log("Edit user", survey._id)}
+                      >
+                        <EditIcon size={20} fill="#979797" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      content="Delete user"
+                      color="error"
+                      onClick={() => {
+                        handleDelete(survey._id);
+                      }}
                     >
-                      <EyeIcon size={20} fill="#979797" />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip content="Edit user">
-                    <IconButton
-                      onClick={() => console.log("Edit user", survey._id)}
-                    >
-                      <EditIcon size={20} fill="#979797" />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip
-                    content="Delete user"
-                    color="error"
-                    onClick={() => {
-                      handleDelete(survey._id);
-                    }}
+                      <IconButton>
+                        <DeleteIcon size={20} fill="#FF0080" />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                  <StyledBadge
+                    type={
+                      SurveyStatus[survey.surveyStatus] as
+                        | "FILLED"
+                        | "PENDING"
+                        | "DRAFT"
+                    }
                   >
-                    <IconButton>
-                      <DeleteIcon size={20} fill="#FF0080" />
-                    </IconButton>
-                  </Tooltip>
+                    {SurveyStatus[survey.surveyStatus]}
+                  </StyledBadge>
                 </div>
               </div>
             </Collapse>
