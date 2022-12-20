@@ -224,7 +224,7 @@ function HistoryTableMobile({
             <Collapse
               className="w-[300px]"
               title={
-                <Text h4>
+                <Text h4 className="font-bold">
                   {survey.candidateFirstName + " " + survey.candidateLastName}
                 </Text>
               }
@@ -234,7 +234,9 @@ function HistoryTableMobile({
                 <div className="flex justify-between">
                   <div className="flex flex-col">
                     <Text h4>{survey.recruitment.recruitmentName}</Text>
-                    <Text h4>{survey.recruitment.recruitmentId}</Text>
+                    <Text h4 className="text-gray-500">
+                      {survey.recruitment._id}
+                    </Text>
                   </div>
                 </div>
                 <Spacer />
