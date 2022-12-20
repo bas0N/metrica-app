@@ -32,6 +32,7 @@ function HistoryTableMobile({
   const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
   const { setVisible, bindings } = useModal();
+
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
@@ -78,7 +79,7 @@ function HistoryTableMobile({
     <div className="flex flex-col mx-auto justify-center items-center mb-8">
       <Modal
         scroll
-        width="600px"
+        width="350px"
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
         {...bindings}
@@ -221,6 +222,7 @@ function HistoryTableMobile({
         <Collapse.Group splitted>
           {surveysState.map((survey: any) => (
             <Collapse
+              className="w-[300px]"
               title={
                 <Text h4>
                   {survey.candidateFirstName + " " + survey.candidateLastName}
@@ -238,17 +240,27 @@ function HistoryTableMobile({
                 <Spacer />
                 <div className="flex justify-between">
                   <div className="flex justify-between w-1/2">
-                    <Tooltip content="Details">
-                      <IconButton
-                        onClick={() => {
-                          console.log("View user", survey.id);
-                          setVisible(true);
-                          setUserDetails(survey.surveyData);
-                        }}
-                      >
-                        <EyeIcon size={20} fill="#979797" />
-                      </IconButton>
-                    </Tooltip>
+                    <div
+                      className={`${
+                        SurveyStatus[survey.surveyStatus] == "FILLED"
+                          ? "flex"
+                          : "invisible"
+                      }`}
+                    >
+                      <Tooltip content="Details">
+                        <IconButton
+                          onClick={() => {
+                            console.log("View user", survey.id);
+                            setVisible(true);
+                            console.log(survey);
+                            setUserDetails(survey.surveyData);
+                          }}
+                        >
+                          <EyeIcon size={20} fill="#979797" />
+                        </IconButton>
+                      </Tooltip>
+                    </div>
+
                     <Tooltip content="Edit user">
                       <IconButton
                         onClick={() => console.log("Edit user", survey._id)}
