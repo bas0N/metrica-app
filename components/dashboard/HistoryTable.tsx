@@ -21,7 +21,7 @@ import { IconButton } from "../../components/table/IconButton";
 import { EyeIcon } from "../../components/table/EyeIcon";
 import { EditIcon } from "../../components/table/EditIcon";
 import { DeleteIcon } from "../../components/table/DeleteIcon";
-import { AnyARecord } from "dns";
+import { useRouter } from "next/router";
 import {
   GetSurveysPaginated,
   Survey,
@@ -38,6 +38,7 @@ function HistoryTable({
   totalItems: number;
 }) {
   const { setVisible, bindings } = useModal();
+  const router = useRouter();
 
   const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
@@ -168,7 +169,14 @@ function HistoryTable({
             </Col>
             <Col css={{ d: "flex" }}>
               <Tooltip content="Edit user">
-                <IconButton onClick={() => console.log("Edit user", survey.id)}>
+                <IconButton
+                  onClick={() => {
+                    console.log("Edit user", survey.id);
+                    router.push(
+                      `http://localhost:3002/form/start-form/${survey.id}`
+                    );
+                  }}
+                >
                   <EditIcon size={20} fill="#979797" />
                 </IconButton>
               </Tooltip>
@@ -301,21 +309,27 @@ function HistoryTable({
               <Button
                 className="bg-green-400/70 hover:bg-green-500/50"
                 size="sm"
-                href={`${userDetails.personalLinksSurvey?.githubUrl}`}
+                onClick={() => {
+                  router.push(userDetails.personalLinksSurvey?.githubUrl);
+                }}
               >
                 Github
               </Button>
               <Button
                 className="bg-green-400/70 hover:bg-green-500/50"
                 size="sm"
-                href={`${userDetails.personalLinksSurvey?.linkedinUrl}`}
+                onClick={() => {
+                  router.push(userDetails.personalLinksSurvey?.linkedinUrl);
+                }}
               >
                 Linkedin
               </Button>
               <Button
                 className="bg-green-400/70 hover:bg-green-500/50"
                 size="sm"
-                href={`${userDetails.personalLinksSurvey?.repositoryUrl}`}
+                onClick={() => {
+                  router.push(userDetails.personalLinksSurvey?.repositoryUrl);
+                }}
               >
                 Repository
               </Button>
