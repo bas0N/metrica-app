@@ -72,6 +72,7 @@ function Technologies2({
   useEffect(() => {
     setTechnologies({ languages, frontend, backend, devops, databases, uxui });
     setIsMobile(Mobile());
+    console.log("technologies:", SurveyType["FRONTEND"]);
   }, [languages, frontend, backend, devops, databases, uxui]);
 
   return (
@@ -122,7 +123,7 @@ function Technologies2({
       </Checkbox.Group>
       <Spacer y={2} />
 
-      {typeOfForm == SurveyType["FRONTEND"] || (
+      {typeOfForm == SurveyType["FRONTEND"] && (
         <div>
           <h2 className="text-3xl mt-10 font-extralight border-b-2">
             Frontend
