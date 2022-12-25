@@ -120,12 +120,18 @@ function DashboardLayout({ children }: Props) {
                   onAction={(actionKey) => console.log({ actionKey })}
                 >
                   <Dropdown.Item key="profile" css={{ height: "$18" }}>
-                    <Text b color="inherit" css={{ d: "flex" }}>
-                      Signed in as
-                    </Text>
-                    <Text b color="inherit" css={{ d: "flex" }}>
-                      {user.email}
-                    </Text>
+                    <div
+                      onClick={() => {
+                        router.push("/profile");
+                      }}
+                    >
+                      <Text b color="inherit" css={{ d: "flex" }}>
+                        Signed in as
+                      </Text>
+                      <Text b color="inherit" css={{ d: "flex" }}>
+                        {user.email}
+                      </Text>
+                    </div>
                   </Dropdown.Item>
                   <Dropdown.Item key="settings" withDivider>
                     <div
@@ -144,7 +150,13 @@ function DashboardLayout({ children }: Props) {
                   </Dropdown.Item>
                   <Dropdown.Item key="system">System</Dropdown.Item>
                   <Dropdown.Item key="configurations">
-                    Configurations
+                    <div
+                      onClick={() => {
+                        router.push("/settings");
+                      }}
+                    >
+                      Settings
+                    </div>
                   </Dropdown.Item>
                   <Dropdown.Item key="help_and_feedback" withDivider>
                     Help & Feedback

@@ -40,7 +40,6 @@ import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   //get info about the recruitment
-  console.log(context.params?.recruitmentId);
   if (context.params?.recruitmentId) {
     const res = await fetch(
       `http://localhost:3001/survey/${context.params.recruitmentId}`
