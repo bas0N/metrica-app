@@ -28,6 +28,7 @@ import {
   SurveyDataToRender,
   SurveyStatus,
 } from "../../types/survey";
+import { getClientAccessToken } from "../../utils/getClientAccessToken";
 function HistoryTable({
   surveys,
   pagesAvailable,
@@ -71,7 +72,6 @@ function HistoryTable({
     };
   });
   const handleDelete = async (surveyId: string) => {
-    console.log(surveyId);
     try {
       const res = await fetch(`http://localhost:3001/survey/${surveyId}`, {
         method: "DELETE",
@@ -93,15 +93,22 @@ function HistoryTable({
           theme: "dark",
         });
       }
-
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
   const handlePageChange = async (page: number) => {
+    //gets access token using client session
+    const accessToken = await getClientAccessToken();
+
     const res = await fetch(
-      `http://localhost:3001/survey/getSurveysPaginated/${page}`
+      `http://localhost:3001/survey/getSurveysPaginated/${page}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
