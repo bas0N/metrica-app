@@ -19,6 +19,7 @@ import { EditIcon } from "../table/EditIcon";
 import { DeleteIcon } from "../table/DeleteIcon";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getClientAccessToken } from "../../utils/getClientAccessToken";
 
 function HistoryTableMobile({
   surveys,
@@ -66,8 +67,17 @@ function HistoryTableMobile({
   };
 
   const handlePageChange = async (page: number) => {
+    //gets access token using client session
+    const accessToken = await getClientAccessToken();
+
     const res = await fetch(
-      `http://localhost:3001/survey/getSurveysPaginated/${page}`
+      `http://localhost:3001/survey/getSurveysPaginated/${page}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
