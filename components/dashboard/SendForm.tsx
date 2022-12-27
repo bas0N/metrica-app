@@ -48,13 +48,19 @@ function SendFormToApplicant({
   };
   const handleSubmit = async () => {
     try {
+      const resToken = await fetch(
+        `http://localhost:3002/api/auth/getAccessToken`
+      );
+      let dataJsoned = await resToken.json();
+      console.log(dataJsoned.token.accessToken);
+      console.log("post dupa2");
       const res = await fetch(`http://localhost:3001/survey/createSurvey`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${dataJsoned.token.accessToken}`,
         },
         body: JSON.stringify({
-          email: "elam@gmail.com",
           addSurveyDto: {
             recipientEmail,
             candidateFirstName,
@@ -65,7 +71,8 @@ function SendFormToApplicant({
           },
         }),
       });
-      if (res.status === 500) {
+      console.log(res);
+      if (res.status === 500 || res.status === 401) {
         toast.error("Error occured while sending a form.", { theme: "dark" });
       } else {
         toast.success("Form sent successfully.", { theme: "dark" });
