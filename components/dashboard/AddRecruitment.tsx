@@ -15,6 +15,7 @@ import { SurveyType } from "../../types/survey";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getClientAccessToken } from "../../utils/getClientAccessToken";
 const initialValues = {
   recruitmentId: "",
   recruitmentName: "",
@@ -52,12 +53,13 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     });
   };
   const handleSubmit = async () => {
-    //console.log({ ...values, checked });
+    const accessToken = await getClientAccessToken();
     const res = await fetch(
       `http://localhost:3001/recruitment/addRecruitment`,
       {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -66,6 +68,11 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
         }),
       }
     );
+    if (res.status == 500 || res.status == 400 || res.status == 401) {
+      toast.error(`Error, status: ${res.status}`, { theme: "dark" });
+
+      return;
+    }
     const recruitment: any = await res.json();
     toast.success("Recruitment added successfully.", { theme: "dark" });
 

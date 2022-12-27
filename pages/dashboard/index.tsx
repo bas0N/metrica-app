@@ -12,7 +12,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     try {
       //getAccessToken from auth0 as executed on the server
       const { accessToken } = await getAccessToken(context.req, context.res);
-      console.log(accessToken);
       const res = await fetch(
         `http://localhost:3001/survey/getSurveysPaginated/1`,
         {

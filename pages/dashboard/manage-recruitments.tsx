@@ -1,4 +1,4 @@
-import { useUser } from "@auth0/nextjs-auth0";
+import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -7,8 +7,15 @@ import DashboardLayout from "../../components/layout/DashboardLayout";
 import { Recruitment } from "../../types/recruitment";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { accessToken } = await getAccessToken(context.req, context.res);
   const res = await fetch(
-    `http://localhost:3001/recruitment/getAllRecruitments`
+    `http://localhost:3001/recruitment/getAllRecruitments`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
   );
   const recruitments: Array<Recruitment> = await res.json();
 
@@ -17,14 +24,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 function ManageRecruitments({ recruitments }: { recruitments: Recruitment[] }) {
-  //const { user, error, isLoading } = useUser();
-  // useEffect(() => {
-  //   if (!user) {
-  //     console.log(user);
-  //     console.log("redirect z page-a bo nie bylo usera");
-  //     // router.replace("/");
-  //   }
-  // }, [user]);
   const { user, error, isLoading } = useUser();
   const router = useRouter();
 
