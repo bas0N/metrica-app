@@ -218,7 +218,8 @@ function HistoryTable({
           <div className="flex flex-col">
             <Text className="font-bold text-2xl">Technologies</Text>
             <div>
-              {Array.isArray(userDetails.technologiesSurvey?.languages) ? (
+              {Array.isArray(userDetails.technologiesSurvey?.languages) &&
+              userDetails.technologiesSurvey?.languages.length != 0 ? (
                 <div className="flex flex-col">
                   <Text className="font-bold">Languages</Text>
 
@@ -234,7 +235,8 @@ function HistoryTable({
             </div>
 
             <div>
-              {Array.isArray(userDetails.technologiesSurvey?.frontend) ? (
+              {Array.isArray(userDetails.technologiesSurvey?.frontend) &&
+              userDetails.technologiesSurvey?.frontend.length != 0 ? (
                 <div className="flex flex-col">
                   <Text className="font-bold">Frontend</Text>
 
@@ -249,7 +251,8 @@ function HistoryTable({
               )}
             </div>
             <div>
-              {Array.isArray(userDetails.technologiesSurvey?.backend) ? (
+              {Array.isArray(userDetails.technologiesSurvey?.backend) &&
+              userDetails.technologiesSurvey?.backend.length != 0 ? (
                 <div className="flex flex-col">
                   <Text className="font-bold">Backend</Text>
 
@@ -264,7 +267,8 @@ function HistoryTable({
               )}
             </div>
             <div>
-              {Array.isArray(userDetails.technologiesSurvey?.devops) ? (
+              {Array.isArray(userDetails.technologiesSurvey?.devops) &&
+              userDetails.technologiesSurvey?.devops.length != 0 ? (
                 <div className="flex flex-col">
                   <Text className="font-bold">Devops</Text>
 
@@ -279,7 +283,8 @@ function HistoryTable({
               )}
             </div>
             <div>
-              {Array.isArray(userDetails.technologiesSurvey?.uxui) ? (
+              {Array.isArray(userDetails.technologiesSurvey?.uxui) &&
+              userDetails.technologiesSurvey?.uxui.length != 0 ? (
                 <div className="flex flex-col">
                   <Text className="font-bold">UXUI</Text>
 

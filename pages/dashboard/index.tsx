@@ -15,8 +15,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       const res = await fetch(
         `http://localhost:3001/survey/getSurveysPaginated/1`
       );
-      const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
+      let { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
         await res.json();
+      //in case no elements are there
+      surveys = surveys ? surveys : [];
+      pagesAvailable = pagesAvailable ? pagesAvailable : 0;
+      totalItems = totalItems ? totalItems : 0;
       return { props: { surveys, pagesAvailable, totalItems } };
     } catch (err) {
       console.log(err);

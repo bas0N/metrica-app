@@ -8,7 +8,6 @@ export default async function tokenHandler(req, res) {
   const session = await getSession(req, res);
   //const token = session?.accessToken;
   const token = await getAccessToken(req, res);
-  console.log(token);
 
   // const response = await fetch("http://localhost:3001/survey/getSurveys", {
   //   method: "GET",
@@ -17,5 +16,5 @@ export default async function tokenHandler(req, res) {
   //   },
   // });
   // const data = await response.json();
-  res.status(200).json({ elo: token });
+  res.status(200).json({ token });
 }
