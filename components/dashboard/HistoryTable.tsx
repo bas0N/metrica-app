@@ -98,6 +98,7 @@ function HistoryTable({
     }
   };
   const handlePageChange = async (page: number) => {
+    console.log();
     //gets access token using client session
     const accessToken = await getClientAccessToken();
 
@@ -112,7 +113,9 @@ function HistoryTable({
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
-    if (res.status != 500 || 400) {
+    if (res.status == 500 || res.status == 400 || res.status == 401) {
+      setSurveysState([]);
+    } else {
       setSurveysState(surveys);
     }
   };
@@ -452,17 +455,34 @@ function HistoryTable({
             </Table.Column>
           )}
         </Table.Header>
-        <Table.Body items={surveysDataToRender}>
-          {(item) => (
-            <Table.Row>
-              {(columnKey) => (
-                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
-              )}
-            </Table.Row>
-          )}
-        </Table.Body>
+        {surveys.length < 1 ? (
+          <Table.Body>{}</Table.Body>
+        ) : (
+          <Table.Body items={surveysDataToRender}>
+            {(item) => (
+              <Table.Row>
+                {(columnKey) => (
+                  <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+                )}
+              </Table.Row>
+            )}
+          </Table.Body>
+        )}
       </Table>
-
+      {surveys.length < 1 && (
+        <div className="flex flex-col justify-center items-center mb-20 mt-10">
+          <Text className="font-extrabold text-5xl">Oooops,</Text>
+          <Text className=" text-2xl">No forms has been sent yet</Text>
+          <Button
+            onClick={() => {
+              router.replace("/dashboard/send-form");
+            }}
+            className="mt-2 bg-green-500 hover:bg-green-600 w-[100px] h-[50px]"
+          >
+            Send form
+          </Button>
+        </div>
+      )}
       <div className="flex justify-end mt-3">
         <Button className="bg-green-500 mx-1 hover:bg-green-600">
           Action1

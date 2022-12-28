@@ -20,6 +20,7 @@ import { DeleteIcon } from "../table/DeleteIcon";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getClientAccessToken } from "../../utils/getClientAccessToken";
+import { useRouter } from "next/router";
 
 function HistoryTableMobile({
   surveys,
@@ -30,6 +31,8 @@ function HistoryTableMobile({
   pagesAvailable: number;
   totalItems: number;
 }) {
+  const router = useRouter();
+
   const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
   const { setVisible, bindings } = useModal();
@@ -81,7 +84,9 @@ function HistoryTableMobile({
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
-    if (res.status != 500 || 400) {
+    if (res.status == 500 || res.status == 400 || res.status == 401) {
+      setSurveysState([]);
+    } else {
       setSurveysState(surveys);
     }
   };
@@ -308,6 +313,20 @@ function HistoryTableMobile({
           ))}
         </Collapse.Group>
       </div>
+      {surveys.length < 1 && (
+        <div className="flex flex-col justify-center items-center mb-20 mt-10">
+          <Text className="font-extrabold text-5xl">Oooops,</Text>
+          <Text className=" text-2xl">No forms has been sent yet</Text>
+          <Button
+            onClick={() => {
+              router.replace("/dashboard/send-form");
+            }}
+            className="mt-2 bg-green-500 hover:bg-green-600 w-[100px] h-[50px]"
+          >
+            Send form
+          </Button>
+        </div>
+      )}
       <Pagination
         onChange={handlePageChange}
         className="self-center mt-6"
