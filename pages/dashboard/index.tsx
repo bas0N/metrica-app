@@ -1,4 +1,4 @@
-import { useUser } from "@auth0/nextjs-auth0";
+import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -10,10 +10,16 @@ import { GetSurveysPaginated, Survey } from "../../types/survey";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if ("appSession" in context.req.cookies) {
     try {
-      //const res = await fetch(`http://localhost:3001/survey/getSurveys`);
-      //const surveys: Array<Survey> = await res.json();
+      //getAccessToken from auth0 as executed on the server
+      const { accessToken } = await getAccessToken(context.req, context.res);
       const res = await fetch(
-        `http://localhost:3001/survey/getSurveysPaginated/1`
+        `http://localhost:3001/survey/getSurveysPaginated/1`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
       );
       let { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
         await res.json();
