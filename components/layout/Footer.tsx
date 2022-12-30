@@ -7,7 +7,6 @@ function Footer() {
 
   const Mobile = () => {
     if (typeof window !== "undefined") {
-      console.log(window.innerWidth);
       if (window.innerWidth < 1024) {
         return true;
       }
@@ -19,6 +18,7 @@ function Footer() {
   useEffect(() => {
     /* Inside of a "useEffect" hook add an event listener that updates
          the "width" state variable when the window size changes */
+    setIsMobile(Mobile());
     window.addEventListener("resize", () => setIsMobile(Mobile()));
 
     /* passing an empty array as the dependencies of the effect will cause this

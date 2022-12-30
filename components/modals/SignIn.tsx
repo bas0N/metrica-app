@@ -81,7 +81,7 @@ function SignIn() {
         flat
         as={Link}
         auto
-        onPress={handler}
+        onClick={handler}
       >
         Sign in
       </Button>
@@ -128,10 +128,10 @@ function SignIn() {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onPress={closeHandler}>
+          <Button auto flat color="error" onClick={closeHandler}>
             Close
           </Button>
-          <Button auto onPress={handleLogin}>
+          <Button auto onClick={handleLogin}>
             Sign in
           </Button>
         </Modal.Footer>

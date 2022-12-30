@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Row,
@@ -40,11 +40,25 @@ function HistoryTable({
 }) {
   const { setVisible, bindings } = useModal();
   const router = useRouter();
-
+  const { query } = useRouter();
+  const [searchValue, setSearchValue] = useState("");
   const [userDetails, setUserDetails] = useState<any>({});
+  //surveys to be rendered
   const [surveysState, setSurveysState] = useState(surveys);
   //dropdown
   const [selected, setSelected] = React.useState<any>(new Set(["text"]));
+
+  const searchOptionsArray = [
+    "recipientEmail",
+    "candidateLastName",
+    "_id",
+  ] as const;
+  type searchOptions = typeof searchOptionsArray[number];
+  const isSearchOptions = (x: any): x is searchOptions =>
+    searchOptionsArray.includes(x);
+  const [selectedSearchOption, setSelectedSearchOption] = useState<
+    Set<searchOptions>
+  >(new Set<searchOptions>(["recipientEmail"]));
 
   const selectedValue = React.useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
@@ -57,6 +71,64 @@ function HistoryTable({
     { name: "ACTIONS", uid: "actions" },
   ];
 
+  const removeQueryParam = (param: string) => {
+    const { pathname, query }: { pathname: any; query: any } = router;
+    const params = new URLSearchParams(query);
+    params.delete(param);
+    router.replace({ pathname, query: params.toString() }, undefined, {
+      shallow: true,
+    });
+  };
+  useEffect(() => {
+    //get url query params
+    const searchValue = router.query["search"];
+    const searchOption = router.query["searchBy"];
+
+    if (isSearchOptions(searchOption)) {
+      setSelectedSearchOption(new Set([searchOption]));
+    } else {
+      removeQueryParam("searchBy");
+    }
+    if (typeof searchValue == "string") {
+      setSearchValue(searchValue);
+      const newSurveys = surveysState.filter((survey: Survey) => {
+        const setIter = selectedSearchOption.values();
+        const outcome: searchOptions = setIter.next().value;
+        return survey[outcome].toLocaleLowerCase().includes(searchValue);
+      });
+      setSurveysState(newSurveys);
+    }
+  }, []);
+  const handleInputSearchText = (event: any) => {
+    setSearchValue(event.target.value);
+    //set parmas
+    router.push(
+      { query: { ...query, search: event.target.value } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+    if (event.target.value.length == 0) {
+      setSurveysState(surveys);
+    } else {
+      console.log(selectedSearchOption, event.target.value);
+      const newSurveys = surveysState.filter((survey: Survey) => {
+        const setIter = selectedSearchOption.values();
+        const outcome: searchOptions = setIter.next().value;
+        return survey[outcome].toLocaleLowerCase().includes(event.target.value);
+      });
+      console.log(newSurveys);
+
+      setSurveysState(newSurveys);
+    }
+  };
+  const handleSearchParam = (event: any) => {
+    router.push({ query: { ...query, searchBy: event.anchorKey } }, undefined, {
+      shallow: true,
+    });
+    setSelectedSearchOption(new Set([event.anchorKey]));
+  };
   const surveysDataToRender = surveysState.map((survey) => {
     return {
       id: survey._id,
@@ -415,26 +487,31 @@ function HistoryTable({
               color="success"
               css={{ tt: "capitalize" }}
             >
-              {selectedValue}
+              Search
             </Dropdown.Button>
             <Dropdown.Menu
               aria-label="Single selection actions"
               color="success"
               disallowEmptySelection
               selectionMode="single"
-              selectedKeys={selected}
-              onSelectionChange={setSelected}
+              selectedKeys={selectedSearchOption}
+              onSelectionChange={handleSearchParam}
             >
-              <Dropdown.Item key="text">Text</Dropdown.Item>
-              <Dropdown.Item key="number">Number</Dropdown.Item>
-              <Dropdown.Item key="date">Date</Dropdown.Item>
-              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+              <Dropdown.Item key="recipientEmail">Email</Dropdown.Item>
+              <Dropdown.Item key="candidateLastName">LastName</Dropdown.Item>
+
+              <Dropdown.Item key="_id">Recruitment Id</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
 
-        <Input className="col-end-6" size="lg" placeholder="Search" />
+        <Input
+          value={searchValue}
+          onChange={handleInputSearchText}
+          className="col-end-6"
+          size="lg"
+          placeholder="Search"
+        />
       </div>
       <Table
         aria-label="Example table with custom cells"
@@ -506,57 +583,3 @@ function HistoryTable({
 }
 
 export default HistoryTable;
-/*
-  const users = [
-    {
-      id: 1,
-      name: "Tony Reichert",
-      role: "CEO",
-      team: "Management",
-      status: "active",
-      age: "29",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-      email: "tony.reichert@example.com",
-    },
-    {
-      id: 2,
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      team: "Development",
-      status: "paused",
-      age: "25",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-      email: "zoey.lang@example.com",
-    },
-    {
-      id: 3,
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      team: "Development",
-      status: "active",
-      age: "22",
-      avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-      email: "jane.fisher@example.com",
-    },
-    {
-      id: 4,
-      name: "William Howard",
-      role: "Community Manager",
-      team: "Marketing",
-      status: "vacation",
-      age: "28",
-      avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-      email: "william.howard@example.com",
-    },
-    {
-      id: 5,
-      name: "Kristen Copper",
-      role: "Sales Manager",
-      team: "Sales",
-      status: "active",
-      age: "24",
-      avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-      email: "kristen.cooper@example.com",
-    },
-  ];
-  */
