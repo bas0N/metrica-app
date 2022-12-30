@@ -63,9 +63,6 @@ function index({
       console.log("width is: ", window.innerWidth);
       window.innerWidth < 620 ? setMobile(true) : setMobile(false);
     });
-    /* passing an empty array as the dependencies of the effect will cause this
-         effect to only run when the component mounts, and not each time it updates.
-         We only want the listener to be added once */
   }, []);
   const router = useRouter();
   const { user, error, isLoading } = useUser();
