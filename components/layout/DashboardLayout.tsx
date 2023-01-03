@@ -38,7 +38,7 @@ function DashboardLayout({ children }: Props) {
 
   console.log(router.pathname);
   return (
-    <div className="flex flex-col sm:h-screen ">
+    <div className="flex flex-col min-h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
         <Link href="http://localhost:3000/">
