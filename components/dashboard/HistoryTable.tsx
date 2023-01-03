@@ -24,6 +24,7 @@ import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { useRouter } from "next/router";
 import {
   GetSurveysPaginated,
+  PositionSeniority,
   Survey,
   SurveyDataToRender,
   SurveyStatus,
@@ -383,9 +384,12 @@ function HistoryTable({
           </div>
           <div className="flex flex-col">
             <Text className="font-bold text-2xl">About Candidate</Text>
-            <Text>Position: {userDetails.aboutYouSurvey?.position}</Text>
             <Text>
-              Years of experience:
+              Position:{" "}
+              {PositionSeniority[userDetails.aboutYouSurvey?.position]}
+            </Text>
+            <Text>
+              Years of experience:{" "}
               {userDetails.aboutYouSurvey?.yearsOfExperience}
             </Text>
             <Text>Description: {userDetails.aboutYouSurvey?.description}</Text>
