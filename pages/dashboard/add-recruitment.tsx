@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import AddRecruitment from "../../components/dashboard/AddRecruitment";
-import AllRecruitments from "../../components/dashboard/AllRecruitments";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import { Recruitment } from "../../types/recruitment";
 
@@ -31,7 +30,7 @@ function ManageRecruitments({ recruitments }: { recruitments: Recruitment[] }) {
   if (isLoading) {
     return <div></div>;
   } else if (user) {
-    return <AllRecruitments recruitments={recruitments} />;
+    return <AddRecruitment recruitments={recruitments} />;
   } else if (!user) {
     router.replace("/");
   }
