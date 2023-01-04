@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Recruitment } from "../../types/recruitment";
-import { SurveyType } from "../../types/survey";
+import { PositionSeniority, SurveyType } from "../../types/survey";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -107,9 +107,9 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
               </Badge>
               <Spacer y={1} />
 
-              <div className=" grid grid-cols-2">
+              <div className=" grid grid-cols-2 gap-4">
                 <div>
-                  <div className="flex flex-col items-start">
+                  <div className="flex flex-col p-3 ">
                     <Text>Recruitment name:</Text>
                     <Input
                       clearable={isEditedId == recruitment.recruitmentId}
@@ -119,9 +119,8 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                       initialValue={recruitment.recruitmentName}
                     />
                   </div>
-                  <Spacer y={1} />
 
-                  <div className="flex flex-col items-start">
+                  <div className="flex flex-col p-3 ">
                     <Text>Recruitment id:</Text>
 
                     <Input
@@ -133,7 +132,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col p-3">
                   <Text>Description</Text>
 
                   <Textarea
@@ -147,8 +146,19 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
 
               <Spacer y={1} />
 
-              <Text>{recruitment.surveyType}</Text>
-              <Text>{recruitment.recruitmentDeadline.toLocaleString()}</Text>
+              <div className="flex gap-2">
+                <Text> Position seniority:</Text>
+                <Text className="font-bold">
+                  {PositionSeniority[recruitment.surveyType]}
+                </Text>
+              </div>
+              <div className="flex gap-2">
+                <Text> Recruitment deadline:</Text>
+                <Text className="font-bold">
+                  {recruitment.recruitmentDeadline.toLocaleString()}
+                </Text>
+              </div>
+
               <Spacer y={1} />
 
               <div className="flex justify-between">
@@ -176,7 +186,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                   }`}
                 >
                   <Button
-                    className={`bg-red-500 hover:bg-green-500/50 h-full `}
+                    className={`bg-red-500 hover:bg-red-500/50 h-full `}
                     size="sm"
                     onClick={() => {
                       handleEdit(recruitment.recruitmentId);
