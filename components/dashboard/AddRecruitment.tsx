@@ -16,6 +16,7 @@ import ConfirmationModal from "../modals/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getClientAccessToken } from "../../utils/getClientAccessToken";
+import { useRouter } from "next/router";
 const initialValues = {
   recruitmentId: "",
   recruitmentName: "",
@@ -23,6 +24,7 @@ const initialValues = {
   recruitmentDeadline: "",
 };
 function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
+  const router = useRouter();
   const [values, setValues] = useState(initialValues);
   const [checked, setChecked] = useState<string>(SurveyType[0]);
   const [isMobile, setIsMobile] = useState(false);
@@ -75,8 +77,8 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     }
     const recruitment: any = await res.json();
     toast.success("Recruitment added successfully.", { theme: "dark" });
-
     handleCancel();
+    router.push("/dashboard/manage-recruitments");
     return {
       recruitment,
     };
@@ -91,7 +93,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     });
   };
   return (
-    <div className="py-4 px-10 h-full max-w-[800px] gap-10 mx-auto">
+    <div className="py-4 px-10 min-h-screen max-w-[800px] gap-10 mx-auto">
       <ToastContainer />
       <Grid.Container className="grid sm:grid-cols-2 mt-8 gap-10 w-full ">
         <Text className="text-4xl sm:text-5xl sm:col-span-2  font-bold">

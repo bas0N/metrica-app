@@ -64,6 +64,12 @@ export type AboutYouSurveyType = {
   yearsOfExperience: string;
   description: string;
 };
+export enum PositionSeniority {
+  Intern,
+  Junior,
+  Mid,
+  Senior,
+}
 
 export type PersonalLinksSurveyType = {
   githubUrl: string;

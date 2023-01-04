@@ -11,7 +11,12 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { useState } from "react";
-import { GetSurveysPaginated, Survey, SurveyStatus } from "../../types/survey";
+import {
+  GetSurveysPaginated,
+  PositionSeniority,
+  Survey,
+  SurveyStatus,
+} from "../../types/survey";
 import { StyledBadge } from "../../components/table/StyledBadge";
 import { IconButton } from "../table/IconButton";
 import { EyeIcon } from "../table/EyeIcon";
@@ -186,9 +191,12 @@ function HistoryTableMobile({
           </div>
           <div className="flex flex-col">
             <Text className="font-bold text-2xl">About Candidate</Text>
-            <Text>Position: {userDetails.aboutYouSurvey?.position}</Text>
             <Text>
-              Years of experience:
+              Position:{" "}
+              {PositionSeniority[userDetails.aboutYouSurvey?.position]}
+            </Text>
+            <Text>
+              Years of experience:{" "}
               {userDetails.aboutYouSurvey?.yearsOfExperience}
             </Text>
             <Text>Description: {userDetails.aboutYouSurvey?.description}</Text>
