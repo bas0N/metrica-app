@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   Checkbox,
   Collapse,
@@ -31,6 +32,7 @@ const initialValues = {
 function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const [values, setValues] = useState(initialValues);
   const [checked, setChecked] = useState<string>(SurveyType[0]);
+  const [isEditedId, setIsEditedId] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
@@ -50,6 +52,13 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     console.log("ismobile: ", Mobile());
   }, []);
 
+  const handleEdit = (id: string) => {
+    if (isEditedId == id) {
+      setIsEditedId("");
+      return;
+    }
+    setIsEditedId(id);
+  };
   return (
     <div className="py-4 px-10 min-h-screen max-w-[800px] gap-10 mx-auto">
       <ToastContainer />
@@ -65,6 +74,21 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
         </Text>
+        <Input
+          className=" col-start-2 col-end-2"
+          size="lg"
+          placeholder="Search"
+        />
+        <Button
+          className="bg-green-400/70 hover:bg-green-500/50 h-full"
+          size="sm"
+          onClick={() => {
+            router.push("/dashboard/add-recruitment");
+          }}
+        >
+          Add recruitment
+        </Button>
+
         {recruitments.map((recruitment: Recruitment) => (
           <Collapse
             shadow
@@ -72,23 +96,103 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
             title={recruitment.recruitmentName}
             subtitle={recruitment.recruitmentId}
           >
-            <div>
-              <Text>{recruitment.recruitmentDescription}</Text>
+            <div className="flex flex-col items-stretch ml-3">
+              <Badge
+                className={
+                  isEditedId != recruitment.recruitmentId ? `invisible` : ""
+                }
+                color="success"
+              >
+                Edit mode
+              </Badge>
+              <Spacer y={1} />
+
+              <div className=" grid grid-cols-2">
+                <div>
+                  <div className="flex flex-col items-start">
+                    <Text>Recruitment name:</Text>
+                    <Input
+                      clearable={isEditedId == recruitment.recruitmentId}
+                      readOnly={isEditedId != recruitment.recruitmentId}
+                      placeholder="Read only"
+                      bordered
+                      initialValue={recruitment.recruitmentName}
+                    />
+                  </div>
+                  <Spacer y={1} />
+
+                  <div className="flex flex-col items-start">
+                    <Text>Recruitment id:</Text>
+
+                    <Input
+                      clearable={isEditedId == recruitment.recruitmentId}
+                      readOnly={isEditedId != recruitment.recruitmentId}
+                      placeholder="Read only"
+                      bordered
+                      initialValue={recruitment.recruitmentId}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col items-start">
+                  <Text>Description</Text>
+
+                  <Textarea
+                    readOnly={isEditedId != recruitment.recruitmentId}
+                    placeholder="Read only"
+                    bordered
+                    initialValue={recruitment.recruitmentDescription}
+                  />
+                </div>
+              </div>
+
+              <Spacer y={1} />
 
               <Text>{recruitment.surveyType}</Text>
               <Text>{recruitment.recruitmentDeadline.toLocaleString()}</Text>
+              <Spacer y={1} />
 
-              <div className="flex ">
-                <Tooltip content="Delete user" color="error">
-                  <IconButton>
-                    <DeleteIcon size={20} fill="#FF0080" />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip content="Edit user">
-                  <IconButton>
-                    <EditIcon size={20} fill="#979797" />
-                  </IconButton>
-                </Tooltip>
+              <div className="flex justify-between">
+                <div className="flex gap-4">
+                  <Tooltip content="Delete user" color="error">
+                    <IconButton>
+                      <DeleteIcon size={20} fill="#FF0080" />
+                    </IconButton>
+                  </Tooltip>
+                  {isEditedId != recruitment.recruitmentId && (
+                    <Tooltip content="Edit user">
+                      <IconButton
+                        onClick={() => {
+                          handleEdit(recruitment.recruitmentId);
+                        }}
+                      >
+                        <EditIcon size={20} fill="#979797" />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </div>
+                <div
+                  className={`flex gap-2 ${
+                    isEditedId != recruitment.recruitmentId ? "invisible" : ""
+                  }`}
+                >
+                  <Button
+                    className={`bg-red-500 hover:bg-green-500/50 h-full `}
+                    size="sm"
+                    onClick={() => {
+                      handleEdit(recruitment.recruitmentId);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className={`bg-green-400/70 hover:bg-green-500/50 h-full ${
+                      isEditedId != recruitment.recruitmentId ? "invisible" : ""
+                    }`}
+                    size="sm"
+                  >
+                    Save changes
+                  </Button>
+                </div>
               </div>
             </div>
           </Collapse>
@@ -101,15 +205,6 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
         <Spacer y={2} />
       </div>
       <Spacer y={2} />
-      <Button
-        className="bg-green-400/70 hover:bg-green-500/50"
-        size="sm"
-        onClick={() => {
-          router.push("/dashboard/add-recruitment");
-        }}
-      >
-        Add recruitment
-      </Button>
     </div>
   );
 }
