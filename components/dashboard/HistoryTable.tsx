@@ -130,7 +130,7 @@ function HistoryTable({
     });
     setSelectedSearchOption(new Set([event.anchorKey]));
   };
-  const surveysDataToRender = surveysState.map((survey) => {
+  const surveysDataToRender = surveysState?.map((survey) => {
     return {
       id: survey._id,
       name: `${survey.candidateFirstName} ${survey.candidateLastName}`,
@@ -536,7 +536,7 @@ function HistoryTable({
             </Table.Column>
           )}
         </Table.Header>
-        {surveys.length < 1 ? (
+        {surveys?.length < 1 ? (
           <Table.Body>{}</Table.Body>
         ) : (
           <Table.Body items={surveysDataToRender}>
@@ -550,7 +550,7 @@ function HistoryTable({
           </Table.Body>
         )}
       </Table>
-      {surveys.length < 1 && (
+      {surveys?.length < 1 && (
         <div className="flex flex-col justify-center items-center mb-20 mt-10">
           <Text className="font-extrabold text-5xl">Oooops,</Text>
           <Text className=" text-2xl">No forms has been sent yet</Text>
