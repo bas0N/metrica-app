@@ -8,6 +8,7 @@ import {
   Input,
   Radio,
   Spacer,
+  Table,
   Text,
   Textarea,
   Tooltip,
@@ -15,10 +16,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { Recruitment } from "../../types/recruitment";
 import { PositionSeniority, SurveyType } from "../../types/survey";
-import ConfirmationModal from "../modals/ConfirmationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getClientAccessToken } from "../../utils/getClientAccessToken";
 import { IconButton } from "../table/IconButton";
 import { DeleteIcon } from "../table/DeleteIcon";
 import { EditIcon } from "../table/EditIcon";
@@ -36,6 +35,65 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
+  const columns = [
+    {
+      key: "category",
+      label: "CATEGORY",
+    },
+    {
+      key: "value",
+      label: "VALUE",
+    },
+    {
+      key: "seniority",
+      label: "SENIORITY",
+    },
+    {
+      key: "deadline",
+      label: "DEADLINE",
+    },
+  ];
+  const rows = [
+    {
+      key: "1",
+      category: "Surveys send",
+      value: "4",
+      seniority: "SENIOR",
+      deadline:
+        new Date().getDate() +
+        "-" +
+        new Date().getMonth() +
+        1 +
+        "-" +
+        new Date().getFullYear(),
+    },
+    {
+      key: "2",
+      category: "Surveys responded",
+      value: "3",
+      seniority: "MID",
+      deadline:
+        new Date().getDate() +
+        "-" +
+        new Date().getMonth() +
+        1 +
+        "-" +
+        new Date().getFullYear(),
+    },
+    {
+      key: "3",
+      category: "Jane Fisher",
+      value: "Senior Developer",
+      seniority: "JUNIOR",
+      deadline:
+        new Date().getDate() +
+        "-" +
+        new Date().getMonth() +
+        1 +
+        "-" +
+        new Date().getFullYear(),
+    },
+  ];
   const Mobile = () => {
     if (typeof window !== "undefined") {
       if (window.innerWidth < 1024) {
@@ -158,6 +216,32 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                   {recruitment.recruitmentDeadline.toLocaleString()}
                 </Text>
               </div>
+              <Spacer y={2} />
+              <Text className="font-bold text-3xl mb-5">STATS</Text>
+              <Table
+                lined
+                headerLined
+                aria-label="Example table with dynamic content"
+                css={{
+                  height: "auto",
+                  minWidth: "100%",
+                }}
+              >
+                <Table.Header columns={columns}>
+                  {(column) => (
+                    <Table.Column key={column.key}>{column.label}</Table.Column>
+                  )}
+                </Table.Header>
+                <Table.Body items={rows}>
+                  {(item: any) => (
+                    <Table.Row key={item.key}>
+                      {(columnKey) => (
+                        <Table.Cell>{item[columnKey]}</Table.Cell>
+                      )}
+                    </Table.Row>
+                  )}
+                </Table.Body>
+              </Table>
 
               <Spacer y={1} />
 
