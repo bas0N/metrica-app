@@ -81,6 +81,11 @@ function HistoryTable({
     });
   };
   useEffect(() => {
+    // const exec = async () => {
+    //   const accessToken = await getClientAccessToken();
+    //   console.log(accessToken);
+    // };
+    // exec();
     //get url query params
     const searchValue = router.query["search"];
     const searchOption = router.query["searchBy"];
