@@ -16,5 +16,9 @@ export default async function tokenHandler(req, res) {
   //   },
   // });
   // const data = await response.json();
-  res.status(200).json({ token });
+  if (token) {
+    res.status(200).json({ token });
+  } else {
+    res.status(400).json({ message: "no token found" });
+  }
 }
