@@ -1,13 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { NextUIProvider } from "@nextui-org/react";
+import { NextUIProvider, Modal, Text, Row, Button } from "@nextui-org/react";
 // 1. Import `createTheme`
 import { createTheme } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import Layout from "../components/layout/Layout";
 import { store } from "../app/store";
 import { Provider } from "react-redux";
-import { UserProvider } from "@auth0/nextjs-auth0";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 type ComponentWithPageLayout = AppProps & {
   Component: AppProps["Component"] & {

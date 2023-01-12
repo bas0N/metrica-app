@@ -15,7 +15,7 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { Logo } from "../../assets/Logo";
-import { useUser } from "@auth0/nextjs-auth0";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 type Props = {
   children: React.ReactNode;
