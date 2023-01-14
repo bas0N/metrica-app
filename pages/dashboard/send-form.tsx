@@ -1,10 +1,11 @@
-import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import SendFormToApplicant from "../../components/dashboard/SendForm";
 import { Recruitment } from "../../types/recruitment";
 import { GetServerSidePropsContext } from "next";
+import { getAccessToken } from "@auth0/nextjs-auth0";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res);
   const res = await fetch(
