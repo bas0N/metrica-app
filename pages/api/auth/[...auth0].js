@@ -5,7 +5,7 @@ export default handleAuth({
   async login(req, res) {
     try {
       await handleLogin(req, res, {
-        returnTo: "/dashboard",
+        returnTo: "http://localhost:3002/dashboard",
         authorizationParams: {
           audience: process.env.AUTH0_AUDIENCE, // or AUTH0_AUDIENCE
         },

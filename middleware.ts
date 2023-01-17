@@ -3,6 +3,7 @@ import { getSession } from "@auth0/nextjs-auth0/edge";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
+  console.log(req.url);
   const ses = await getSession(req, res);
   console.log(ses?.user.email);
   console.log(ses?.accessToken);
@@ -19,12 +20,15 @@ export async function middleware(req: NextRequest) {
       }
     );
     const { paymentNeeded } = await response.json();
-    if (paymentNeeded) {
-      //something can be added to url to indicate that pricing is really needed
+    if (paymentNeeded && !req.url.includes("http://localhost:3002/pricing")) {
       return NextResponse.redirect(
-        "http://localhost:3000/pricing?paymentNeeded=true"
+        "http://localhost:3002/pricing?paymentNeeded=true"
       );
+
+      //something can be added to url to indicate that pricing is really needed
     }
+  } else {
+    return NextResponse.redirect("http://localhost:3002/api/auth/login");
   }
 
   //Do nothing
@@ -32,5 +36,5 @@ export async function middleware(req: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/dashboard/:path*",
+  matcher: ["/dashboard/:path*", "/pricing/:path*"],
 };
