@@ -1,7 +1,27 @@
 import { Card, Text, Button } from "@nextui-org/react";
 import React from "react";
+import { useRouter } from "next/router";
 
 function Pricing() {
+  const router = useRouter();
+  const handleBuy = async (event: any) => {
+    console.log(event.target.value);
+    const resAccessToken = await fetch(
+      `http://localhost:3002/api/auth/getAccessToken`
+    );
+    const { token } = await resAccessToken.json();
+    console.log(token);
+    const responsePayment = await fetch(`http://localhost:3001/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.accessToken}`,
+      },
+      body: JSON.stringify({ productId: event.target.value }),
+    });
+    const resJSON = await responsePayment.json();
+    router.push(resJSON.url);
+  };
   return (
     <div className="bg-inherit">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -112,11 +132,12 @@ function Pricing() {
               </li>
             </ul>
             <Button
+              onClick={handleBuy}
               shadow
               auto
               color="success"
               className="bg-green-500"
-              href="/"
+              value="price_1MNQsoGl8yFTD812dWNNFpB2"
             >
               Get started
             </Button>

@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
     if (paymentNeeded) {
       //something can be added to url to indicate that pricing is really needed
       return NextResponse.redirect(
-        "http://localhost:3000/pricing?paymentNeeded=true"
+        "http://localhost:3002/pricing?paymentNeeded=true"
       );
     }
   }

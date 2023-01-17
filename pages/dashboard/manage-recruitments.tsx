@@ -1,4 +1,5 @@
-import { getAccessToken, useUser } from "@auth0/nextjs-auth0";
+import { getAccessToken } from "@auth0/nextjs-auth0";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
