@@ -20,6 +20,7 @@ function Pricing() {
       body: JSON.stringify({ productId: event.target.value }),
     });
     const resJSON = await responsePayment.json();
+    console.log(resJSON);
     router.push(resJSON.url);
   };
   return (
