@@ -119,7 +119,7 @@ function SendFormToApplicant({
 
         <Select handler={handleOptionChange} {...selectReqruitmentData} />
       </Grid.Container>
-      <div className="grid-cols-1 grid">
+      <div className="grid-cols-1 grid mt-4">
         <Textarea
           value={description}
           onChange={handleDescriptionChange}

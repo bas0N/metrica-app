@@ -142,8 +142,14 @@ function DashboardLayout({ children }: Props) {
                       Dashboard
                     </div>
                   </Dropdown.Item>
-                  <Dropdown.Item key="team_settings">
-                    Team Settings
+                  <Dropdown.Item key="Account">
+                    <div
+                      onClick={() => {
+                        router.push("http://localhost:3002/account");
+                      }}
+                    >
+                      Account
+                    </div>
                   </Dropdown.Item>
                   <Dropdown.Item key="analytics" withDivider>
                     Analytics

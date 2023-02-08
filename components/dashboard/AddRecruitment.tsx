@@ -135,7 +135,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
-          className=" col-start-1 col-end-2 col"
+          className=" col-start-1 col-end-2 col "
         />
         <Spacer y={2} />
 

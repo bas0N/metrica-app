@@ -1,4 +1,5 @@
 import React from "react";
+import DashboardLayout from "../../components/layout/DashboardLayout";
 import Pricing from "../../components/Pricing";
 
 function index() {
@@ -8,5 +9,6 @@ function index() {
     </div>
   );
 }
+index.PageLayout = DashboardLayout;
 
 export default index;

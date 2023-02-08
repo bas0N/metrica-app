@@ -1,6 +1,7 @@
-import { Button, FormElement, Input } from "@nextui-org/react";
+import { Button, FormElement, Input, Text } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import DashboardLayout from "../../components/layout/DashboardLayout";
 function index() {
   const router = useRouter();
   const [companyName, setCompanyName] = useState("");
@@ -34,15 +35,17 @@ function index() {
         />
 
         <div className=" w-2/3 lg:w-1/2 self-center flex flex-col mt-10 ">
+          <Text className="text-2xl font-light">
+            Set the name of yout company:
+          </Text>
           <Input
             onChange={(event: React.ChangeEvent<FormElement>) =>
               setCompanyName(event.target.value)
             }
             value={companyName}
-            className="w-full"
+            className="w-full "
             name="recruitmentId"
             underlined
-            labelPlaceholder="Name of your company"
             color="default"
           />
           <Button
@@ -60,5 +63,6 @@ function index() {
     </div>
   );
 }
+index.PageLayout = DashboardLayout;
 
 export default index;

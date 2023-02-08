@@ -8,6 +8,8 @@ import {
   Modal,
   useModal,
   Button,
+  Input,
+  Dropdown,
 } from "@nextui-org/react";
 import React from "react";
 import { useState } from "react";
@@ -36,12 +38,47 @@ function HistoryTableMobile({
   pagesAvailable: number;
   totalItems: number;
 }) {
+  const searchOptionsArray = [
+    "recipientEmail",
+    "candidateLastName",
+    "_id",
+  ] as const;
+  type searchOptions = typeof searchOptionsArray[number];
   const router = useRouter();
 
   const [userDetails, setUserDetails] = useState<any>({});
   const [surveysState, setSurveysState] = useState(surveys);
-  const { setVisible, bindings } = useModal();
+  const [searchValue, setSearchValue] = useState("");
 
+  const { setVisible, bindings } = useModal();
+  const { query } = useRouter();
+  const [selectedSearchOption, setSelectedSearchOption] = useState<
+    Set<searchOptions>
+  >(new Set<searchOptions>(["recipientEmail"]));
+
+  const handleInputSearchText = (event: any) => {
+    setSearchValue(event.target.value);
+    //set parmas
+    router.push(
+      { query: { ...query, search: event.target.value } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+    if (event.target.value.length == 0) {
+      setSurveysState(surveys);
+    } else {
+      const newSurveys = surveysState.filter((survey: Survey) => {
+        const setIter = selectedSearchOption.values();
+        const outcome: searchOptions = setIter.next().value;
+        return survey[outcome].toLocaleLowerCase().includes(event.target.value);
+      });
+      console.log(newSurveys);
+
+      setSurveysState(newSurveys);
+    }
+  };
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
@@ -96,7 +133,40 @@ function HistoryTableMobile({
     }
   };
   return (
-    <div className="flex flex-col mx-auto justify-center items-center mb-8">
+    <div className="flex flex-col mx-auto justify-center items-center mb-8 py-10">
+      <div className="flex flex-col w-full  max-w-[300px]">
+        <Dropdown>
+          <Dropdown.Button
+            className="bg-green-500/50 "
+            flat
+            color="success"
+            css={{ tt: "capitalize" }}
+          >
+            Search
+          </Dropdown.Button>
+          <Dropdown.Menu
+            aria-label="Single selection actions"
+            color="success"
+            disallowEmptySelection
+            selectionMode="single"
+            // selectedKeys={selectedSearchOption}
+            // onSelectionChange={handleSearchParam}
+          >
+            <Dropdown.Item key="recipientEmail">Email</Dropdown.Item>
+            <Dropdown.Item key="candidateLastName">LastName</Dropdown.Item>
+
+            <Dropdown.Item key="_id">Recruitment Id</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Input
+          value={searchValue}
+          onChange={handleInputSearchText}
+          className="mt-6 "
+          size="lg"
+          placeholder="Search"
+        />
+      </div>
+
       <Modal
         scroll
         width="350px"
