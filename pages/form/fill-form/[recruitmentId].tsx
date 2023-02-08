@@ -75,13 +75,48 @@ function index({ survey }: { survey: any }) {
   const [technologies, setTechnologies] = useState<TechnologiesSurveyType>();
   const [aboutYou, setAboutYou] = useState<AboutYouSurveyType>();
   const [personalLinks, setPersonalLinks] = useState<PersonalLinksSurveyType>();
+  const [error, setError] = useState({
+    partOneError: false,
+    partTwoError: false,
+    partThreeError: false,
+  });
   const router = useRouter();
 
   const onSubmit = async () => {
-    console.log(technologies);
-    console.log(aboutYou);
-    console.log(personalLinks);
-    //success toaster
+    if (
+      technologies?.backend.length == 0 &&
+      technologies.databases.length == 0 &&
+      technologies.devops.length == 0 &&
+      technologies.frontend.length == 0 &&
+      technologies.languages.length == 0 &&
+      technologies.uxui.length == 0
+    ) {
+      toast.error("Select at least one technology you know.", {
+        theme: "dark",
+      });
+      return;
+    } else {
+    }
+    if (
+      aboutYou?.position.length == 0 ||
+      aboutYou?.yearsOfExperience.length == 0 ||
+      aboutYou?.description.length == 0
+    ) {
+      toast.error("Fill the about you part.", { theme: "dark" });
+      return;
+    } else {
+    }
+    if (
+      personalLinks?.githubUrl.length == 0 ||
+      personalLinks?.linkedinUrl.length == 0 ||
+      personalLinks?.repositoryUrl.length == 0
+    ) {
+      toast.error("Fill the personal links part.", { theme: "dark" });
+      return;
+    } else {
+    }
+
+    // success toaster
     const fillForm = await fetch(
       `http://localhost:3001/survey/fillSurvey/${survey._id}`,
       {
@@ -118,9 +153,6 @@ function index({ survey }: { survey: any }) {
       }, 3000);
       return;
     }
-
-    toast.error("Error while sending form.", { theme: "dark" });
-    return;
   };
   return (
     <Container>
@@ -150,7 +182,9 @@ function index({ survey }: { survey: any }) {
           PART 2: About You
         </h2>
         <AboutYou setAboutYou={setAboutYou} />
-        <h2 className="text-4xl sm:text-6xl font-light mt-6">PART 3: Links</h2>
+        <h2 className="text-4xl sm:text-6xl font-light mt-6">
+          PART 3: Personal links
+        </h2>
         <PersonalLinks setPersonalLinks={setPersonalLinks} />
       </div>
       <div className="w-full flex items-center justify-center">
