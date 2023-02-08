@@ -440,55 +440,9 @@ function HistoryTable({
       </Modal>
       <ToastContainer />
       <div className=" m-4 grid grid-cols-2 gap-3">
-        <div className="grid grid-cols-3 gap-1">
-          <Dropdown>
-            <Dropdown.Button
-              className="bg-green-500/50 "
-              flat
-              color="success"
-              css={{ tt: "capitalize" }}
-            >
-              {selectedValue}
-            </Dropdown.Button>
-            <Dropdown.Menu
-              aria-label="Single selection actions"
-              color="success"
-              disallowEmptySelection
-              selectionMode="single"
-              selectedKeys={selected}
-              onSelectionChange={setSelected}
-            >
-              <Dropdown.Item key="text">Text</Dropdown.Item>
-              <Dropdown.Item key="number">Number</Dropdown.Item>
-              <Dropdown.Item key="date">Date</Dropdown.Item>
-              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown>
-            <Dropdown.Button
-              className="bg-green-500/50 "
-              flat
-              color="success"
-              css={{ tt: "capitalize" }}
-            >
-              {selectedValue}
-            </Dropdown.Button>
-            <Dropdown.Menu
-              aria-label="Single selection actions"
-              color="success"
-              disallowEmptySelection
-              selectionMode="single"
-              selectedKeys={selected}
-              onSelectionChange={setSelected}
-            >
-              <Dropdown.Item key="text">Text</Dropdown.Item>
-              <Dropdown.Item key="number">Number</Dropdown.Item>
-              <Dropdown.Item key="date">Date</Dropdown.Item>
-              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+        <div className="grid grid-cols-3 gap-1 ">
+          <div></div>
+          <div></div>
           <Dropdown>
             <Dropdown.Button
               className="bg-green-500/50 "

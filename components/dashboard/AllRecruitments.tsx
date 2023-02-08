@@ -29,6 +29,8 @@ const initialValues = {
   recruitmentDeadline: "",
 };
 function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
+  const { query } = useRouter();
+
   const [values, setValues] = useState(initialValues);
   const [checked, setChecked] = useState<string>(SurveyType[0]);
   const [isEditedId, setIsEditedId] = useState("");
@@ -185,15 +187,42 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const handleDescriptionChange = async (event: any) => {
     setCurrentlyEditedDescription(event.target.value);
   };
+  const [searchValue, setSearchValue] = useState("");
+  const [filteredRecruitments, setFilteredRecruitments] =
+    useState(recruitments);
 
+  const handleInputSearchText = (event: any) => {
+    setSearchValue(event.target.value);
+
+    router.push(
+      { query: { ...query, search: event.target.value } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+    if (event.target.value.length == 0) {
+      setFilteredRecruitments(recruitments);
+    } else {
+      const newRecruitments = filteredRecruitments.filter(
+        (recruitment: Recruitment) => {
+          return recruitment.recruitmentName
+            .toLocaleLowerCase()
+            .includes(event.target.value);
+        }
+      );
+
+      setFilteredRecruitments(newRecruitments);
+    }
+  };
   return (
     <div className="py-4 px-10 min-h-screen max-w-[800px] gap-10 mx-auto">
       <ToastContainer />
-      <Grid.Container className="grid sm:grid-cols-2 mt-8 gap-10 w-full ">
-        <Text className="text-4xl sm:text-5xl sm:col-span-2  font-bold">
+      <Grid.Container className="grid grid-cols-1 lg:grid-cols-2  pt-8 gap-10 w-full ">
+        <Text className="text-4xl sm:text-5xl lg:col-span-2  font-bold">
           All recruitments
         </Text>
-        <Text className="col-span-2">
+        <Text className="lg:col-span-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -202,9 +231,10 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           pariatur.
         </Text>
         <Input
-          className=" col-start-2 col-end-2"
+          className=" lg:col-start-2 lg:col-end-2"
           size="lg"
-          placeholder="Search"
+          placeholder="Search by recruitment name"
+          onChange={handleInputSearchText}
         />
         <Button
           className="bg-green-400/70 hover:bg-green-500/50 h-full"
@@ -215,8 +245,8 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
         >
           Add recruitment
         </Button>
-        <Collapse.Group splitted className="col-span-2">
-          {recruitments.map((recruitment: Recruitment, index) => (
+        <Collapse.Group splitted className="lg:col-span-2">
+          {filteredRecruitments.map((recruitment: Recruitment, index) => (
             <Collapse
               key={recruitment._id}
               shadow

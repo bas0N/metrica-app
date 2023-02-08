@@ -14,7 +14,6 @@ function Select({ command, options, handler }: SelectProps) {
       handler(event.target.value);
     }
   };
-  console.log(options);
   return (
     <div className="mt-4">
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 ">
