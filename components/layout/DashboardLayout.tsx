@@ -52,7 +52,7 @@ function DashboardLayout({ children }: Props) {
           >
             <Logo />
             <Text className="cursor-pointer ml-3" b color="inherit" hideIn="xs">
-              STACK METRICS
+              METRICA
             </Text>
           </Navbar.Brand>
         </Link>
