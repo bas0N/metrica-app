@@ -1,9 +1,7 @@
 import { Button, Text } from "@nextui-org/react";
 import React from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 
 function Hero() {
-  const { user, error, isLoading } = useUser();
   //const { accessToken } = await getAccessToken(req, res);
 
   //console.log(user);

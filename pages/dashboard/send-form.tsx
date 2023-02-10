@@ -9,7 +9,7 @@ import { getAccessToken } from "@auth0/nextjs-auth0";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res);
   const res = await fetch(
-    `http://localhost:3001/recruitment/getAllRecruitments`,
+    `${process.env.BACKEND_URL}/recruitment/getAllRecruitments`,
     {
       headers: {
         "Content-Type": "application/json",

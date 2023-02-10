@@ -7,7 +7,7 @@ export const register = async (user: RegisterUserDto) => {
   console.log(user);
   console.log("auth service -> register");
   const response = await axios.post(
-    "http://localhost:3001/auth/register",
+    process.env.BACKEND_URL + "/auth/register",
     user
   );
   if (response.data) {
@@ -21,7 +21,7 @@ export const logout = () => {
 export const login = async (credentials: LoginUserDto) => {
   console.log(credentials);
   const response = await axios.post(
-    "http://localhost:3001/auth/login",
+    process.env.BACKEND_URL + "/auth/login",
     credentials
   );
   if (response.data) {

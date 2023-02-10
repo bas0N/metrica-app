@@ -57,7 +57,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const handleSubmit = async () => {
     const accessToken = await getClientAccessToken();
     const res = await fetch(
-      `http://localhost:3001/recruitment/addRecruitment`,
+      `${process.env.BACKEND_URL}/recruitment/addRecruitment`,
       {
         method: "POST",
         headers: {

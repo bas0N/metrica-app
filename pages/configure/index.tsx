@@ -8,11 +8,11 @@ function index() {
   const sendCompanyName = async () => {
     console.log(companyName);
     const resAccessToken = await fetch(
-      `http://localhost:3002/api/auth/getAccessToken`
+      `${process.env.APP_URL}/api/auth/getAccessToken`
     );
     const { token } = await resAccessToken.json();
     const response = await fetch(
-      `http://localhost:3001/users/set-company-name`,
+      `${process.env.BACKEND_URL}/users/set-company-name`,
       {
         method: "POST",
         headers: {
@@ -43,7 +43,8 @@ function index() {
               setCompanyName(event.target.value)
             }
             value={companyName}
-            className="w-full "
+            className="w-full"
+            size="xl"
             name="recruitmentId"
             underlined
             color="default"
