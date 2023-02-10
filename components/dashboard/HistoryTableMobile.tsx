@@ -82,7 +82,7 @@ function HistoryTableMobile({
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
-      const res = await fetch(`http://localhost:3001/survey/${surveyId}`, {
+      const res = await fetch(`${process.env.BACKEND_URL}/survey/${surveyId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,7 @@ function HistoryTableMobile({
     const accessToken = await getClientAccessToken();
 
     const res = await fetch(
-      `http://localhost:3001/survey/getSurveysPaginated/${page}`,
+      `${process.env.BACKEND_URL}/survey/getSurveysPaginated/${page}`,
       {
         headers: {
           "Content-Type": "application/json",

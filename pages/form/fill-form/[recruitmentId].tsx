@@ -42,7 +42,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   //get info about the recruitment
   if (context.params?.recruitmentId) {
     const res = await fetch(
-      `http://localhost:3001/survey/${context.params.recruitmentId}`
+      `${process.env.BACKEND_URL}/survey/${context.params.recruitmentId}`
     );
     if (res.status == 400 || 500) {
       console.log("error");
@@ -56,7 +56,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       return {
         redirect: {
           permanent: false,
-          destination: "http://localhost:3000",
+          destination: `${process.env.LANDING_URL}`,
         },
         props: {},
       };
@@ -118,7 +118,7 @@ function index({ survey }: { survey: any }) {
 
     // success toaster
     const fillForm = await fetch(
-      `http://localhost:3001/survey/fillSurvey/${survey._id}`,
+      `${process.env.BACKEND_URL}/survey/fillSurvey/${survey._id}`,
       {
         method: "PUT",
         headers: {
@@ -133,7 +133,7 @@ function index({ survey }: { survey: any }) {
     );
     //change status of the survey
     const changeState = await fetch(
-      `http://localhost:3001/survey/changeSurveyState`,
+      `${process.env.BACKEND_URL}/survey/changeSurveyState`,
       {
         method: "PUT",
         headers: {
@@ -149,7 +149,7 @@ function index({ survey }: { survey: any }) {
       toast.success("Form filled successfully.", { theme: "dark" });
       //redirect to main page
       setTimeout(() => {
-        router.push("http://localhost:3000");
+        router.push(`${process.env.LANDING_URL}`);
       }, 3000);
       return;
     }

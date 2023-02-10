@@ -14,7 +14,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       //getAccessToken from auth0 as executed on the server
       const { accessToken } = await getAccessToken(context.req, context.res);
       const res = await fetch(
-        `http://localhost:3001/survey/getSurveysPaginated/1`,
+        `${process.env.BACKEND_URL}/survey/getSurveysPaginated/1`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function index({
     }
   } else if (!user) {
     console.log("nie ma usera w dashboardzie");
-    router.replace("http://localhost:3000/");
+    router.replace(`${process.env.LANDING_URL}`);
   }
 }
 

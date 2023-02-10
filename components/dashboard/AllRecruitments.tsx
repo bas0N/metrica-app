@@ -145,7 +145,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     }
     //request to postman saving edits
     const res = await fetch(
-      `http://localhost:3001/recruitment/editRecruitment`,
+      `${process.env.BACKEND_URL}/recruitment/editRecruitment`,
       {
         method: "PUT",
         headers: {
@@ -231,6 +231,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           pariatur.
         </Text>
         <Input
+          autoComplete="new-password"
           className=" lg:col-start-2 lg:col-end-2"
           size="lg"
           placeholder="Search by recruitment name"
@@ -268,6 +269,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                     <div className="flex flex-col p-3 ">
                       <Text>Recruitment name:</Text>
                       <Input
+                        autoComplete="new-password"
                         aria-label=" "
                         clearable={isEditedId == recruitment._id}
                         readOnly={isEditedId != recruitment._id}
@@ -286,6 +288,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
                       <Text>Recruitment id:</Text>
 
                       <Input
+                        autoComplete="new-password"
                         clearable={isEditedId == recruitment._id}
                         readOnly={isEditedId != recruitment._id}
                         placeholder="Read only"

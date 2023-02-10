@@ -24,6 +24,7 @@ function PersonalLinks({
         tempor incididunt ut labore et dolore magna aliqua.{" "}
       </h3>
       <Input
+        autoComplete="new-password"
         label="Github Url"
         type="url"
         onChange={(e) => {
@@ -36,6 +37,7 @@ function PersonalLinks({
         tempor incididunt ut labore et dolore magna aliqua.{" "}
       </h3>
       <Input
+        autoComplete="new-password"
         label="Repo Url"
         type="url"
         onChange={(e) => {
@@ -49,6 +51,7 @@ function PersonalLinks({
       </h3>
 
       <Input
+        autoComplete="new-password"
         label="Linkedin Url"
         type="url"
         onChange={(e) => {

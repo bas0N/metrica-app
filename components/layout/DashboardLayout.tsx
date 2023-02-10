@@ -41,7 +41,7 @@ function DashboardLayout({ children }: Props) {
     <div className="flex flex-col min-h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
-        <Link href="http://localhost:3000/">
+        <Link href={`${process.env.LANDING_URL}`}>
           <Navbar.Brand
             className="cursor-pointer flex items-center"
             css={{
@@ -52,7 +52,7 @@ function DashboardLayout({ children }: Props) {
           >
             <Logo />
             <Text className="cursor-pointer ml-3" b color="inherit" hideIn="xs">
-              STACK METRICS
+              METRICA
             </Text>
           </Navbar.Brand>
         </Link>
@@ -145,7 +145,7 @@ function DashboardLayout({ children }: Props) {
                   <Dropdown.Item key="Account">
                     <div
                       onClick={() => {
-                        router.push("http://localhost:3002/account");
+                        router.push(process.env.APP_URL + "/account");
                       }}
                     >
                       Account
@@ -192,7 +192,7 @@ function DashboardLayout({ children }: Props) {
             )}
           </Navbar.Content>
         </Navbar.Content>
-        <Navbar.Collapse disableAnimation>
+        <Navbar.Collapse className="">
           {collapseItems.map((item, index) => (
             <Navbar.CollapseItem
               key={item.name}

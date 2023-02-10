@@ -49,26 +49,29 @@ function SendFormToApplicant({
   const handleSubmit = async () => {
     try {
       const resToken = await fetch(
-        `http://localhost:3002/api/auth/getAccessToken`
+        `${process.env.APP_URL}/api/auth/getAccessToken`
       );
       let dataJsoned = await resToken.json();
-      const res = await fetch(`http://localhost:3001/survey/createSurvey`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${dataJsoned.token.accessToken}`,
-        },
-        body: JSON.stringify({
-          addSurveyDto: {
-            recipientEmail,
-            candidateFirstName,
-            candidateLastName,
-            surveyStatus: SurveyStatus[1],
-            recruitmentId: option,
-            terminationDate: new Date("2023-10-10"),
+      const res = await fetch(
+        `${process.env.BACKEND_URL}/survey/createSurvey`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${dataJsoned.token.accessToken}`,
           },
-        }),
-      });
+          body: JSON.stringify({
+            addSurveyDto: {
+              recipientEmail,
+              candidateFirstName,
+              candidateLastName,
+              surveyStatus: SurveyStatus[1],
+              recruitmentId: option,
+              terminationDate: new Date("2023-10-10"),
+            },
+          }),
+        }
+      );
       console.log(res);
       if (res.status === 500 || res.status === 401) {
         toast.error("Error occured while sending a form.", { theme: "dark" });
@@ -101,6 +104,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Firstname"
+          autoComplete="new-password"
         />
         <Input
           value={candidateLastName}
@@ -108,6 +112,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Lastname"
+          autoComplete="new-password"
         />
         <Input
           value={recipientEmail}
@@ -115,6 +120,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Email"
+          autoComplete="new-password"
         />
 
         <Select handler={handleOptionChange} {...selectReqruitmentData} />

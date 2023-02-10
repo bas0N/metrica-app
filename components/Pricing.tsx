@@ -7,11 +7,11 @@ function Pricing() {
   const handleBuy = async (event: any) => {
     console.log(event.target.value);
     const resAccessToken = await fetch(
-      `http://localhost:3002/api/auth/getAccessToken`
+      `${process.env.APP_URL}/api/auth/getAccessToken`
     );
     const { token } = await resAccessToken.json();
     console.log(token);
-    const responsePayment = await fetch(`http://localhost:3001/payment`, {
+    const responsePayment = await fetch(`${process.env.BACKEND_URL}/payment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

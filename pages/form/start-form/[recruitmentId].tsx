@@ -8,7 +8,7 @@ import { GetServerSidePropsContext } from "next";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.params?.recruitmentId) {
     const res = await fetch(
-      `http://localhost:3001/survey/${context.params.recruitmentId}`
+      `${process.env.BACKEND_URL}/survey/${context.params.recruitmentId}`
     );
     if (res.status == 400 || res.status == 500) {
       console.log("error while fetching form data");
@@ -50,15 +50,14 @@ function InitForm({ survey }: { survey: any | undefined }) {
       // );
       //console.log(await res);
       router.replace(
-        `http://localhost:3002/form/fill-form/${router.query.recruitmentId}`
+        `${process.env.APP_URL}/form/fill-form/${router.query.recruitmentId}`
       );
     } catch (e) {
       console.dir(e);
-      console.log(e.error);
     }
   };
   const handleCancel = () => {
-    router.replace("http://localhost:3000/");
+    router.replace(`${process.env.LANDING_URL}`);
   };
   if (survey.surveyStatus == 1) {
     return (
@@ -140,7 +139,7 @@ function InitForm({ survey }: { survey: any | undefined }) {
                 buttonTitle="Go back"
                 buttonType="CANCEL"
                 funct={() => {
-                  router.replace("http://localhost:3000/");
+                  router.replace(`${process.env.LANDING_URL}`);
                 }}
               />
             </div>

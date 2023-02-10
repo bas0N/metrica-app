@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
     //ask server about payment details of this particular user
 
     const response = await fetch(
-      "http://localhost:3001/users/check-if-payment-config-needed",
+      process.env.BACKEND_URL + "/users/check-if-payment-config-needed",
       {
         method: "GET",
         headers: {
@@ -30,24 +30,27 @@ export async function middleware(req: NextRequest) {
       req.url
     );
     // const { paymentNeeded } = await response.json();
-    if (paymentNeeded && !req.url.includes("http://localhost:3002/pricing")) {
-      return NextResponse.redirect("http://localhost:3002/pricing");
+    if (paymentNeeded && !req.url.includes(process.env.APP_URL + "/pricing")) {
+      return NextResponse.redirect(process.env.APP_URL + "/pricing");
 
       //something can be added to url to indicate that pricing is really needed
     }
-    if (!paymentNeeded && req.url.includes("http://localhost:3002/pricing")) {
-      return NextResponse.redirect("http://localhost:3002/dashboard");
+    if (!paymentNeeded && req.url.includes(process.env.APP_URL + "/pricing")) {
+      return NextResponse.redirect(process.env.APP_URL + "/dashboard");
 
       //something can be added to url to indicate that pricing is really needed
     }
-    if (configNeeded && !req.url.includes("http://localhost:3002/pricing")) {
-      return NextResponse.redirect("http://localhost:3002/configure");
+    if (configNeeded && !req.url.includes(process.env.APP_URL + "/pricing")) {
+      return NextResponse.redirect(process.env.APP_URL + "/configure");
     }
-    if (!configNeeded && !req.url.includes("http://localhost:3002/dashboard")) {
-      return NextResponse.redirect("http://localhost:3002/dashboard");
+    if (
+      !configNeeded &&
+      !req.url.includes(process.env.APP_URL + "/dashboard")
+    ) {
+      return NextResponse.redirect(process.env.APP_URL + "/dashboard");
     }
   } else {
-    return NextResponse.redirect("http://localhost:3002/api/auth/login");
+    return NextResponse.redirect(process.env.APP_URL + "/api/auth/login");
   }
 
   //Do nothing

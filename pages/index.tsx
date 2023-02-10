@@ -8,7 +8,7 @@ import { useTheme } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
 import ThreeStories from "../components/ThreeStories";
 import VectorStories from "../components/VectorStories";
-import { useUser } from "@auth0/nextjs-auth0";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 const Home = () => {
   const { setTheme } = useNextTheme();
@@ -17,7 +17,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("http://localhost:3002/dashboard");
+    router.replace(process.env.APP_URL + "/dashboard");
   });
   return (
     <Container>

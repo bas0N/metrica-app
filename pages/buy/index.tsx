@@ -12,7 +12,9 @@ const stripePromise = loadStripe(
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res);
 
-  const res = await fetch(`http://localhost:3001/payment/get-all-products`);
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/payment/get-all-products`
+  );
   const products = await res.json();
   return {
     props: { products, accessToken },
@@ -31,7 +33,7 @@ function index({
   const handleBuy = async (event: any) => {
     console.log(event.target.value);
     try {
-      const res = await fetch(`http://localhost:3001/payment`, {
+      const res = await fetch(`${process.env.BACKEND_URL}/payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
