@@ -40,7 +40,7 @@ function Hero() {
           size={{ "@xs": "lg", "@lg": "xl" }}
           className="bg-gradient-to-r from-green-500 to-green-900 font-extrabold"
         >
-          Join stack met
+          Join Metrica
         </Button>
       </div>
     </div>

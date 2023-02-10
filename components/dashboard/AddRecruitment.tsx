@@ -106,6 +106,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           underlined
           labelPlaceholder="Id of the recruitment process "
           color="default"
+          autoComplete="new-password"
         />
         <Input
           onChange={handleInputChange}
@@ -114,6 +115,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           underlined
           labelPlaceholder="Name of the position"
           color="default"
+          autoComplete="new-password"
         />
         <Input
           onChange={handleInputChange}
@@ -122,6 +124,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           width="186px"
           label="Questionare ending date"
           type="date"
+          autoComplete="new-password"
         />
       </Grid.Container>
 

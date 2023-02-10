@@ -192,7 +192,7 @@ function DashboardLayout({ children }: Props) {
             )}
           </Navbar.Content>
         </Navbar.Content>
-        <Navbar.Collapse disableAnimation>
+        <Navbar.Collapse className="">
           {collapseItems.map((item, index) => (
             <Navbar.CollapseItem
               key={item.name}

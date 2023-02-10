@@ -101,6 +101,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Firstname"
+          autoComplete="new-password"
         />
         <Input
           value={candidateLastName}
@@ -108,6 +109,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Lastname"
+          autoComplete="new-password"
         />
         <Input
           value={recipientEmail}
@@ -115,6 +117,7 @@ function SendFormToApplicant({
           clearable
           underlined
           labelPlaceholder="Email"
+          autoComplete="new-password"
         />
 
         <Select handler={handleOptionChange} {...selectReqruitmentData} />
