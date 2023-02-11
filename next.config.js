@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "http://18.197.106.181:3001/:path*",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/:path*",
+  //       destination: "http://18.197.106.181:3001/:path*",
+  //     },
+  //   ];
+  // },
   reactStrictMode: true,
   swcMinify: false,
   images: {
