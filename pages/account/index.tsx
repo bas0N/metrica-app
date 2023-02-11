@@ -17,7 +17,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res, {
     scopes: ["openid", "profile", "email"],
   });
-  const res = await fetch(`${process.env.BACKEND_URL}/users/me`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,

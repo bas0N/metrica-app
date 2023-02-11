@@ -41,7 +41,7 @@ function DashboardLayout({ children }: Props) {
     <div className="flex flex-col min-h-screen ">
       <Navbar isBordered variant="sticky">
         <Navbar.Toggle showIn="xs" />
-        <Link href={`${process.env.LANDING_URL}`}>
+        <Link href={`${process.env.NEXT_PUBLIC_LANDING_URL}`}>
           <Navbar.Brand
             className="cursor-pointer flex items-center"
             css={{
@@ -145,7 +145,9 @@ function DashboardLayout({ children }: Props) {
                   <Dropdown.Item key="Account">
                     <div
                       onClick={() => {
-                        router.push(process.env.APP_URL + "/account");
+                        router.push(
+                          process.env.NEXT_PUBLIC_APP_URL + "/account"
+                        );
                       }}
                     >
                       Account

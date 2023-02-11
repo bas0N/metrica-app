@@ -151,12 +151,15 @@ function HistoryTable({
   });
   const handleDelete = async (surveyId: string) => {
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/survey/${surveyId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/${surveyId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const response: any = await res.json();
       //if success, delete form array
       if (res.status !== 500 || 404) {
@@ -181,7 +184,7 @@ function HistoryTable({
     const accessToken = await getClientAccessToken();
 
     const res = await fetch(
-      `${process.env.BACKEND_URL}/survey/getSurveysPaginated/${page}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/getSurveysPaginated/${page}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -261,7 +264,7 @@ function HistoryTable({
                   onClick={() => {
                     console.log("Edit user", survey.id);
                     router.push(
-                      `${process.env.APP_URL}/form/start-form/${survey.id}`
+                      `${process.env.NEXT_PUBLIC_APP_URL}/form/start-form/${survey.id}`
                     );
                   }}
                 >

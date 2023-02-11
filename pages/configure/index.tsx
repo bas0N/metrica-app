@@ -8,11 +8,11 @@ function index() {
   const sendCompanyName = async () => {
     console.log(companyName);
     const resAccessToken = await fetch(
-      `${process.env.APP_URL}/api/auth/getAccessToken`
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/getAccessToken`
     );
     const { token } = await resAccessToken.json();
     const response = await fetch(
-      `${process.env.BACKEND_URL}/users/set-company-name`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/set-company-name`,
       {
         method: "POST",
         headers: {

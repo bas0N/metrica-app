@@ -17,7 +17,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace(process.env.APP_URL + "/dashboard");
+    router.replace(process.env.NEXT_PUBLIC_APP_URL + "/dashboard");
   });
   return (
     <Container>
