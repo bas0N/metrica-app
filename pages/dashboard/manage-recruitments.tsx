@@ -11,7 +11,7 @@ import { Recruitment } from "../../types/recruitment";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res);
   const res = await fetch(
-    `${process.env.BACKEND_URL}/recruitment/getAllRecruitments`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/recruitment/getAllRecruitments`,
     {
       headers: {
         "Content-Type": "application/json",

@@ -49,11 +49,11 @@ function SendFormToApplicant({
   const handleSubmit = async () => {
     try {
       const resToken = await fetch(
-        `${process.env.APP_URL}/api/auth/getAccessToken`
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/getAccessToken`
       );
       let dataJsoned = await resToken.json();
       const res = await fetch(
-        `${process.env.BACKEND_URL}/survey/createSurvey`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/createSurvey`,
         {
           method: "POST",
           headers: {

@@ -15,6 +15,10 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // publicRuntimeConfig: {
+  //   NEXT_PUBLIC_BACKEND_URL: process.env.BACKEND_URL,
+  //   NEXT_PUBLIC_APP_URL: process.env.APP_URL,
+  // },
 };
 
 module.exports = nextConfig;

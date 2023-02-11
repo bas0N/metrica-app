@@ -13,7 +13,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { accessToken } = await getAccessToken(context.req, context.res);
 
   const res = await fetch(
-    `${process.env.BACKEND_URL}/payment/get-all-products`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment/get-all-products`
   );
   const products = await res.json();
   return {
@@ -33,14 +33,17 @@ function index({
   const handleBuy = async (event: any) => {
     console.log(event.target.value);
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/payment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ productId: event.target.value }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ productId: event.target.value }),
+        }
+      );
       console.log(res);
       const resJSON = await res.json();
       router.push(resJSON.url);

@@ -145,7 +145,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
     }
     //request to postman saving edits
     const res = await fetch(
-      `${process.env.BACKEND_URL}/recruitment/editRecruitment`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/recruitment/editRecruitment`,
       {
         method: "PUT",
         headers: {

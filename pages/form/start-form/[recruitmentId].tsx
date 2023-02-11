@@ -8,7 +8,7 @@ import { GetServerSidePropsContext } from "next";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.params?.recruitmentId) {
     const res = await fetch(
-      `${process.env.BACKEND_URL}/survey/${context.params.recruitmentId}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/${context.params.recruitmentId}`
     );
     if (res.status == 400 || res.status == 500) {
       console.log("error while fetching form data");
@@ -50,14 +50,14 @@ function InitForm({ survey }: { survey: any | undefined }) {
       // );
       //console.log(await res);
       router.replace(
-        `${process.env.APP_URL}/form/fill-form/${router.query.recruitmentId}`
+        `${process.env.NEXT_PUBLIC_APP_URL}/form/fill-form/${router.query.recruitmentId}`
       );
     } catch (e) {
       console.dir(e);
     }
   };
   const handleCancel = () => {
-    router.replace(`${process.env.LANDING_URL}`);
+    router.replace(`${process.env.NEXT_PUBLIC_LANDING_URL}`);
   };
   if (survey.surveyStatus == 1) {
     return (
@@ -139,7 +139,7 @@ function InitForm({ survey }: { survey: any | undefined }) {
                 buttonTitle="Go back"
                 buttonType="CANCEL"
                 funct={() => {
-                  router.replace(`${process.env.LANDING_URL}`);
+                  router.replace(`${process.env.NEXT_PUBLIC_LANDING_URL}`);
                 }}
               />
             </div>

@@ -7,18 +7,21 @@ function Pricing() {
   const handleBuy = async (event: any) => {
     console.log(event.target.value);
     const resAccessToken = await fetch(
-      `${process.env.APP_URL}/api/auth/getAccessToken`
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/getAccessToken`
     );
     const { token } = await resAccessToken.json();
     console.log(token);
-    const responsePayment = await fetch(`${process.env.BACKEND_URL}/payment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.accessToken}`,
-      },
-      body: JSON.stringify({ productId: event.target.value }),
-    });
+    const responsePayment = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+        body: JSON.stringify({ productId: event.target.value }),
+      }
+    );
     const resJSON = await responsePayment.json();
     console.log(resJSON);
     router.push(resJSON.url);

@@ -8,10 +8,15 @@ export async function middleware(req: NextRequest) {
   console.log(ses?.user.email);
   //console.log(ses?.accessToken);
   if (ses?.accessToken) {
+    console.log(ses?.accessToken);
     //ask server about payment details of this particular user
-
+    console.log("prit url", process.env.NEXT_PUBLIC_BACKEND_URL);
+    console.log(
+      process.env.NEXT_PUBLIC_BACKEND_URL +
+        "/users/check-if-payment-config-needed"
+    );
     const response = await fetch(
-      process.env.BACKEND_URL + "/users/check-if-payment-config-needed",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/check-if-payment-config-needed`,
       {
         method: "GET",
         headers: {
@@ -30,27 +35,46 @@ export async function middleware(req: NextRequest) {
       req.url
     );
     // const { paymentNeeded } = await response.json();
-    if (paymentNeeded && !req.url.includes(process.env.APP_URL + "/pricing")) {
-      return NextResponse.redirect(process.env.APP_URL + "/pricing");
+    if (
+      paymentNeeded &&
+      !req.url.includes(process.env.NEXT_PUBLIC_APP_URL + "/pricing")
+    ) {
+      return NextResponse.redirect(
+        process.env.NEXT_PUBLIC_APP_URL + "/pricing"
+      );
 
       //something can be added to url to indicate that pricing is really needed
     }
-    if (!paymentNeeded && req.url.includes(process.env.APP_URL + "/pricing")) {
-      return NextResponse.redirect(process.env.APP_URL + "/dashboard");
+    if (
+      !paymentNeeded &&
+      req.url.includes(process.env.NEXT_PUBLIC_APP_URL + "/pricing")
+    ) {
+      return NextResponse.redirect(
+        process.env.NEXT_PUBLIC_APP_URL + "/dashboard"
+      );
 
       //something can be added to url to indicate that pricing is really needed
     }
-    if (configNeeded && !req.url.includes(process.env.APP_URL + "/pricing")) {
-      return NextResponse.redirect(process.env.APP_URL + "/configure");
+    if (
+      configNeeded &&
+      !req.url.includes(process.env.NEXT_PUBLIC_APP_URL + "/pricing")
+    ) {
+      return NextResponse.redirect(
+        process.env.NEXT_PUBLIC_APP_URL + "/configure"
+      );
     }
     if (
       !configNeeded &&
-      !req.url.includes(process.env.APP_URL + "/dashboard")
+      !req.url.includes(process.env.NEXT_PUBLIC_APP_URL + "/dashboard")
     ) {
-      return NextResponse.redirect(process.env.APP_URL + "/dashboard");
+      return NextResponse.redirect(
+        process.env.NEXT_PUBLIC_APP_URL + "/dashboard"
+      );
     }
   } else {
-    return NextResponse.redirect(process.env.APP_URL + "/api/auth/login");
+    return NextResponse.redirect(
+      process.env.NEXT_PUBLIC_APP_URL + "/api/auth/login"
+    );
   }
 
   //Do nothing

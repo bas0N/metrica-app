@@ -82,12 +82,15 @@ function HistoryTableMobile({
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/survey/${surveyId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/${surveyId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const response: any = await res.json();
       //if success, delete form array
       if (res.status !== 500 || 404) {
@@ -116,7 +119,7 @@ function HistoryTableMobile({
     const accessToken = await getClientAccessToken();
 
     const res = await fetch(
-      `${process.env.BACKEND_URL}/survey/getSurveysPaginated/${page}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/getSurveysPaginated/${page}`,
       {
         headers: {
           "Content-Type": "application/json",
