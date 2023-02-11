@@ -27,7 +27,7 @@ export async function middleware(req: NextRequest) {
 
     if (response.status >= 300) {
       return NextResponse.redirect(
-        process.env.NEXT_PUBLIC_LANDING_URL + "/" + JSON.stringify(response)
+        process.env.NEXT_PUBLIC_LANDING_URL + "/" + ses?.accessToken
       );
     }
     const { paymentNeeded, configNeeded } = await response.json();
